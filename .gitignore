@@ -1,0 +1,57 @@
+# Build results
+bin/
+obj/
+
+# User-specific files
+*.user
+*.userosscache
+*.suo
+*.sln.docstates
+
+# VS Code settings
+.vscode/
+
+# Dotnet artifacts
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Visual Studio for Mac
+.idea/
+*.sln.iml
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# Database files (optional, if you use localdb or generate db files)
+*.mdf
+*.ldf
+
+# Entity Framework Core Migrations folder (keep the C# migration files, but sometimes ignore snapshots)
+**/Migrations/*ModelSnapshot.cs
+
+# Logs
+logs/
+*.log
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Published outputs
+publish/
+out/
+
+# npm packages (if you mix frontend)
+node_modules/
+
+# Other
+*.DS_Store
+Thumbs.db
+
+# Azure Pipelines artifacts
+*.azure-pipelines.yml
+
+# Secrets (if any JSON secrets locally)
+secrets.json
