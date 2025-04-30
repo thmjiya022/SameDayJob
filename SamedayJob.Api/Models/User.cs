@@ -11,11 +11,11 @@ public class User
     public double Rating { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow; 
 
-    public List<Job> PostedJobs { get; set; }
-    public List<JobRequest> JobRequests { get; set; }
-    public List<Review> GivenReviews { get; set; }
-    public List<Review> ReceivedReviews { get; set; }
-    public List<Message> SentMessages { get; set; }
-    public List<Message> ReceivedMessages { get; set; }
-    public List<Equipment> Tools { get; set; }
+    public List<Job> PostedJobs { get; set; } = new();
+    public List<JobRequest> JobRequests { get; set; } = new();
+    public List<Review> GivenReviews { get; set; } = new();
+    public List<Review> ReceivedReviews { get; set; } = new();
+    public List<Message> SentMessages { get; set; } = new();
+    public List<Message> ReceivedMessages { get; set; } = new();
+    public List<Equipment> Tools { get; set; } = new();
 }
