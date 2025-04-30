@@ -9,7 +9,7 @@ public class User
     public string Password { get; set; }
     public string Role { get; set; }
     public double Rating { get; set; }
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;  // ADDED
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow; 
 
     public List<Job> PostedJobs { get; set; }
     public List<JobRequest> JobRequests { get; set; }

@@ -61,12 +61,21 @@ namespace SamedayJob.Api.Data
             modelBuilder.Entity<JobAssignment>()
                 .HasOne(jobAssignment => jobAssignment.Job)
                 .WithOne(job => job.Assignment)
-                .HasForeignKey<JobAssignment>(jobAssignment => jobAssignment.JobID);
+                .HasForeignKey<JobAssignment>(jobAssignment => jobAssignment.JobId);
 
             modelBuilder.Entity<JobAssignment>()
                 .HasOne(jobAssignment => jobAssignment.Worker)
                 .WithMany()
-                .HasForeignKey(jobAssignment => jobAssignment.WorkerID);
+                .HasForeignKey(jobAssignment => jobAssignment.WorkerId);
+
+            //JOB CATEGORY
+            modelBuilder.Entity<JobCategory>(entity =>
+            {
+                entity.HasKey(e => e.CategoryID);
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(100);
+            });
 
             // REVIEW
             modelBuilder.Entity<Review>()
