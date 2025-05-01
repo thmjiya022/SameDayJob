@@ -14,11 +14,24 @@ namespace SamedayJob.Api.Data
         public DbSet<JobAssignment> JobAssignments { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Message> Messages { get; set; }
-        public DbSet<Equipment> Tools { get; set; }
+        public DbSet<Equipment> Equipment { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            // Configure decimal precision for all decimal properties
+            modelBuilder.Entity<Equipment>()
+                .Property(e => e.DailyPrice)
+                .HasPrecision(18, 2);
+
+            modelBuilder.Entity<Job>()
+                .Property(j => j.Budget)
+                .HasPrecision(18, 2);
+
+            modelBuilder.Entity<JobRequest>()
+                .Property(j => j.BidAmount)
+                .HasPrecision(18, 2);
 
             // USER
             modelBuilder.Entity<User>(userEntity =>
@@ -28,10 +41,10 @@ namespace SamedayJob.Api.Data
                     .HasMaxLength(100);
 
                 userEntity.Property(user => user.Password)
-                    .HasColumnType("nvarchar(200)");
+                    .HasMaxLength(200); // Changed from nvarchar(200)
 
                 userEntity.Property(user => user.CreatedAt)
-                    .HasDefaultValueSql("GETUTCDATE()");
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP"); // Changed from GETUTCDATE()
             });
 
             // JOB
@@ -68,7 +81,7 @@ namespace SamedayJob.Api.Data
                 .WithMany()
                 .HasForeignKey(jobAssignment => jobAssignment.WorkerId);
 
-            //JOB CATEGORY
+            // JOB CATEGORY
             modelBuilder.Entity<JobCategory>(entity =>
             {
                 entity.HasKey(e => e.CategoryID);

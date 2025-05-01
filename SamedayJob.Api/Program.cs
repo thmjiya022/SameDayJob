@@ -11,9 +11,12 @@ builder.Services.AddOpenApi();
 // Add controllers support
 builder.Services.AddControllers();
 
-// Add EF Core + SQL Server
+// // Add EF Core + SQL Server
+// builder.Services.AddDbContext<AppDbContext>(options =>
+//     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlite("Data Source=samedayjob.db"));
 
 // Add password hasher service
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
