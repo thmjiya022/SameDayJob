@@ -11,15 +11,23 @@ builder.Services.AddOpenApi();
 // Add controllers support
 builder.Services.AddControllers();
 
-// // Add EF Core + SQL Server
-// builder.Services.AddDbContext<AppDbContext>(options =>
-//     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
+// Add EF Core with SQLite
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite("Data Source=samedayjob.db"));
 
 // Add password hasher service
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+
+// Add CORS policy
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend", policy =>
+    {
+        policy.WithOrigins("http://localhost:5173")
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
 
 var app = builder.Build();
 
@@ -29,10 +37,12 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
+// Enable CORS before routing
+app.UseCors("AllowFrontend");
+
 app.UseHttpsRedirection();
 app.UseAuthorization();
 
-// Map API controllers
 app.MapControllers();
 
 app.Run();
