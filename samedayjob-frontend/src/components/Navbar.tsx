@@ -1,11 +1,15 @@
 import { Link } from 'react-router-dom';
+import './Navbar.css';
 
 const Navbar = () => {
   return (
-    <nav style={{ padding: '1rem', backgroundColor: '#f0f0f0' }}>
-      <Link to="/" style={{ marginRight: '1rem' }}>Home</Link>
-      <Link to="/users" style={{ marginRight: '1rem' }}>Users</Link>
-      <Link to="/post-job">Post Job</Link>
+    <nav className="navbar">
+      <Link to="/" className="logo">SameDayJob</Link>
+      <div className="nav-links">
+        <Link to="/find-job">Find Job</Link>
+        <Link to="/create-job">Create Job</Link>
+        <Link to="/login">Login</Link>
+      </div>
     </nav>
   );
 };
