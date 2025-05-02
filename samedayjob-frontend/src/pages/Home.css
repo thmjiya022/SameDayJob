@@ -1,0 +1,260 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+  }
+  
+  .home-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  /* Hero Section */
+  .hero {
+    text-align: center;
+    padding: 60px 0;
+    background: #f8f9fa;
+    border-radius: 8px;
+    margin: 20px 0;
+  }
+  
+  .hero h2 {
+    font-size: 32px;
+    margin-bottom: 15px;
+  }
+  
+  .hero p {
+    font-size: 18px;
+    margin-bottom: 30px;
+    color: #666;
+  }
+  
+  .cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .primary-button {
+    padding: 12px 24px;
+    background: #2c3e50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .primary-button:hover {
+    background: #1a252f;
+  }
+  
+  .secondary-button {
+    padding: 12px 24px;
+    background: white;
+    color: #2c3e50;
+    border: 1px solid #2c3e50;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  
+  .secondary-button:hover {
+    background: #f8f9fa;
+  }
+  
+  /* How It Works */
+  .how-it-works {
+    padding: 60px 0;
+    text-align: center;
+  }
+  
+  .how-it-works h2 {
+    font-size: 28px;
+    margin-bottom: 40px;
+  }
+  
+  .steps {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  
+  .step {
+    flex: 1;
+    padding: 20px;
+    border-radius: 8px;
+    background: #f8f9fa;
+  }
+  
+  .step-number {
+    width: 40px;
+    height: 40px;
+    background: #2c3e50;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;
+    font-weight: bold;
+  }
+  
+  /* Categories */
+  .categories {
+    padding: 40px 0;
+    text-align: center;
+  }
+  
+  .categories h2 {
+    font-size: 28px;
+    margin-bottom: 30px;
+  }
+  
+  .category-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  
+  .category-card {
+    padding: 30px 15px;
+    background: #2c3e50;
+    color: white;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: transform 0.3s;
+  }
+  
+  .category-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  /* Taskers */
+  .taskers {
+    padding: 60px 0;
+    text-align: center;
+  }
+  
+  .taskers h2 {
+    font-size: 28px;
+    margin-bottom: 30px;
+  }
+  
+  .tasker-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  
+  .tasker-card {
+    padding: 20px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    transition: box-shadow 0.3s;
+  }
+  
+  .tasker-card:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  }
+  
+  /* App Download */
+  .app-download {
+    padding: 60px 0;
+    text-align: center;
+    background: #f8f9fa;
+    border-radius: 8px;
+    margin: 20px 0;
+  }
+  
+  .app-download h2 {
+    font-size: 28px;
+    margin-bottom: 15px;
+  }
+  
+  .app-download p {
+    font-size: 16px;
+    margin-bottom: 30px;
+    color: #666;
+  }
+  
+  .app-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .app-store-button, .play-store-button {
+    padding: 12px 24px;
+    background: #333;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .play-store-button {
+    background: #4285F4;
+  }
+  
+  /* Safety Standards */
+  .safety {
+    padding: 40px 0;
+  }
+  
+  .safety h2 {
+    font-size: 28px;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .safety ul {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .safety li {
+    margin-bottom: 15px;
+    list-style-type: none;
+    padding-left: 30px;
+    position: relative;
+  }
+  
+  .safety li:before {
+    content: "✓";
+    color: #27ae60;
+    position: absolute;
+    left: 0;
+  }
+  
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 20px 0;
+    border-top: 1px solid #eee;
+    margin-top: 40px;
+    color: #666;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .steps, .category-grid, .tasker-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .header {
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    .cta-buttons, .app-buttons {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }

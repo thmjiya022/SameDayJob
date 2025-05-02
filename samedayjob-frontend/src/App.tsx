@@ -1,19 +1,19 @@
-import { Routes, Route } from 'react-router-dom';
+import React from 'react';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
-import Users from './pages/Users'; // Create this page
-import PostJob from './pages/PostJob'; // Create this page
+import './App.css';
 
 function App() {
   return (
-    <>
+    <div className="App">
+      {/* Blue Navigation Bar */}
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/users" element={<Users />} />
-        <Route path="/post-job" element={<PostJob />} />
-      </Routes>
-    </>
+      
+      {/* Main Content Area */}
+      <main className="main-content">
+        <Home />
+      </main>
+    </div>
   );
 }
 

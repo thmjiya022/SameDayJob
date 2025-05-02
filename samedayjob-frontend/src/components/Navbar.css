@@ -1,32 +1,33 @@
-/* Navbar.css */
-.navbar {
-    background-color: #0a2e65; /* Matches the blue from the homepage */
-    color: white;
-    padding: 1rem 2rem;
+.header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid #eee;
   }
   
-  .navbar .logo {
-    font-size: 1.25rem;
+  .logo {
+    font-size: 24px;
     font-weight: bold;
-    color: white;
-    text-decoration: none;
+    color: #2c3e50;
   }
   
-  .navbar .nav-links {
+  .nav {
     display: flex;
-    gap: 1.5rem;
+    gap: 15px;
   }
   
-  .navbar .nav-links a {
+  .nav-button {
+    padding: 8px 16px;
+    background: none;
+    border: 1px solid #2c3e50;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  
+  .nav-button:hover {
+    background: #2c3e50;
     color: white;
-    text-decoration: none;
-    font-weight: 500;
-  }
-  
-  .navbar .nav-links a:hover {
-    text-decoration: underline;
   }
   
