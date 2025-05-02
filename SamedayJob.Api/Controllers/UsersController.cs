@@ -28,7 +28,11 @@ public class UsersController : ControllerBase
     public async Task<ActionResult<User>> GetById(int id)
     {
         var item = await _context.Users.FindAsync(id);
-        if (item == null) return NotFound();
+
+        if (item == null){
+            return NotFound();
+        }
+
         return item;
     }
 
@@ -38,6 +42,7 @@ public class UsersController : ControllerBase
     {
         _context.Users.Add(item);
         await _context.SaveChangesAsync();
+
         return CreatedAtAction(nameof(GetById), new { id = item.UserID }, item);
     }
 
@@ -48,6 +53,7 @@ public class UsersController : ControllerBase
         if (id != item.UserID) return BadRequest();
         _context.Entry(item).State = EntityState.Modified;
         await _context.SaveChangesAsync();
+
         return NoContent();
     }
 
@@ -59,6 +65,7 @@ public class UsersController : ControllerBase
         if (item == null) return NotFound();
         _context.Users.Remove(item);
         await _context.SaveChangesAsync();
+        
         return NoContent();
     }
 }
