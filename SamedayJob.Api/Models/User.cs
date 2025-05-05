@@ -1,3 +1,5 @@
+using SamedayJob.Api.Enums;
+
 namespace SamedayJob.Api.Models;
 
 public class User
@@ -7,7 +9,7 @@ public class User
     public string PhoneNumber { get; set; }
     public string Email {get; set;}
     public string Password { get; set; }
-    public string Role { get; set; }
+    public UserType Type { get; set; }
     public double Rating { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow; 
 
