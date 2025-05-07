@@ -33,8 +33,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-// Add password hasher service
-builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 
 // Add CORS policy
 builder.Services.AddCors(options =>
@@ -49,6 +47,7 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
+
 // Use OpenAPI in development
 if (app.Environment.IsDevelopment())
 {
@@ -57,10 +56,9 @@ if (app.Environment.IsDevelopment())
 
 // Enable CORS before routing
 app.UseCors("AllowFrontend");
-
 app.UseHttpsRedirection();
+app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();
