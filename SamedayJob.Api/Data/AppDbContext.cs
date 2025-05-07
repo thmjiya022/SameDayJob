@@ -20,7 +20,6 @@ namespace SamedayJob.Api.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            // Configure decimal precision for all decimal properties
             modelBuilder.Entity<Equipment>()
                 .Property(e => e.DailyPrice)
                 .HasPrecision(18, 2);
@@ -41,10 +40,10 @@ namespace SamedayJob.Api.Data
                     .HasMaxLength(100);
 
                 userEntity.Property(user => user.Password)
-                    .HasMaxLength(200); // Changed from nvarchar(200)
+                    .HasMaxLength(200);
 
                 userEntity.Property(user => user.CreatedAt)
-                    .HasDefaultValueSql("CURRENT_TIMESTAMP"); // Changed from GETUTCDATE()
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP");
             });
 
             // JOB
