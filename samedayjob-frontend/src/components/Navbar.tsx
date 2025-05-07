@@ -6,9 +6,9 @@ const Navbar: React.FC = () => {
     <header className="header">
     <h1 className="logo">SameDayJob</h1>
     <nav className="nav">
-      <button className="nav-button">Find Job</button>
-      <button className="nav-button">Create Job</button>
-      <button className="nav-button">Login</button>
+      <p className="nav-button">Find Job</p>
+      <p className="nav-button">Create Job</p>
+      <p className="nav-button">Login</p>
     </nav>
   </header>
   );
