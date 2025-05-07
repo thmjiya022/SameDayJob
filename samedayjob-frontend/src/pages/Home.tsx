@@ -5,7 +5,6 @@ const Home: React.FC = () => {
   return (
     <div className="home-container">
 
-      {/* Hero Section */}
       <section className="hero">
         <h2>Get Help or Earn Money Today</h2>
         <p>Post tasks or find work in your local area. It's fast, easy, and secure.</p>
@@ -15,7 +14,6 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* How It Works */}
       <section className="how-it-works">
         <h2>Why Choose Us</h2>
         <div className="steps">
@@ -37,7 +35,6 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* Popular Categories */}
       <section className="categories">
         <h2>Popular Categories</h2>
         <div className="category-grid">
@@ -48,34 +45,32 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* Top-Rated Taskers */}
       <section className="taskers">
         <h2>Top-Rated Taskers Near You</h2>
         <div className="tasker-grid">
           <div className="tasker-card">
-            <h3>Tumi N.</h3>
+            <h3>N Stevens</h3>
             <p>Cleaning</p>
             <p>4.9 (347 reviews)</p>
           </div>
           <div className="tasker-card">
-            <h3>Chris B.</h3>
+            <h3>T Tefera</h3>
             <p>Gardening</p>
             <p>4.8 (371 reviews)</p>
           </div>
           <div className="tasker-card">
-            <h3>Ayanda K.</h3>
+            <h3>M Maphalala</h3>
             <p>Delivery & Errands</p>
             <p>5.0 (198 reviews)</p>
           </div>
           <div className="tasker-card">
-            <h3>Sipho M.</h3>
+            <h3>D Pillay</h3>
             <p>Handyman</p>
             <p>4.7 (411 reviews)</p>
           </div>
         </div>
       </section>
 
-      {/* App Download */}
       <section className="app-download">
         <h2>Download Our App</h2>
         <p>Get SameDayJob on iOS and Android. Book tasks, chat with workers, and track jobs from your phone.</p>
@@ -85,7 +80,6 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* Safety Standards */}
       <section className="safety">
         <h2>Our Safety Standards</h2>
         <ul>
@@ -95,7 +89,6 @@ const Home: React.FC = () => {
         </ul>
       </section>
 
-      {/* Footer */}
       <footer className="footer">
         <p>© 2025 GameDayJob. All rights reserved.</p>
       </footer>
