@@ -1,25 +1,31 @@
 {
   "format": 1,
   "restore": {
-    "/home/thobani/SameDayJob/SamedayJob.Api/SamedayJob.Api.csproj": {}
+    "C:\\Users\\ThobaniMjiyakho\\Desktop\\SameDayJob\\SamedayJob.Api\\SamedayJob.Api.csproj": {}
   },
   "projects": {
-    "/home/thobani/SameDayJob/SamedayJob.Api/SamedayJob.Api.csproj": {
+    "C:\\Users\\ThobaniMjiyakho\\Desktop\\SameDayJob\\SamedayJob.Api\\SamedayJob.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/thobani/SameDayJob/SamedayJob.Api/SamedayJob.Api.csproj",
+        "projectUniqueName": "C:\\Users\\ThobaniMjiyakho\\Desktop\\SameDayJob\\SamedayJob.Api\\SamedayJob.Api.csproj",
         "projectName": "SamedayJob.Api",
-        "projectPath": "/home/thobani/SameDayJob/SamedayJob.Api/SamedayJob.Api.csproj",
-        "packagesPath": "/home/thobani/.nuget/packages/",
-        "outputPath": "/home/thobani/SameDayJob/SamedayJob.Api/obj/",
+        "projectPath": "C:\\Users\\ThobaniMjiyakho\\Desktop\\SameDayJob\\SamedayJob.Api\\SamedayJob.Api.csproj",
+        "packagesPath": "C:\\Users\\ThobaniMjiyakho\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ThobaniMjiyakho\\Desktop\\SameDayJob\\SamedayJob.Api\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/home/thobani/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\ThobaniMjiyakho\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -38,7 +44,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.200"
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net9.0": {
@@ -92,7 +98,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.202/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.105/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
