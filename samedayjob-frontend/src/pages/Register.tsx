@@ -23,7 +23,7 @@ const Register: React.FC = () => {
 
         try {
             await register({ name, email, phoneNumber, password });
-            navigate('/login'); // Redirect to login after successful registration
+            navigate('/login');
         } catch (err) {
             setError(err instanceof Error ? err.message : 'Registration failed');
         }
