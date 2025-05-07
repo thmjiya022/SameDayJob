@@ -1,6 +1,6 @@
 namespace SamedayJob.Api.DTOs;
 
-class RegisterDto{
+public class RegisterDto{
     public string Name {get; set;}
     public string PhoneNumber {get; set;}
     public string Email {get; set;}
