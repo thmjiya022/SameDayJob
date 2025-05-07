@@ -1,19 +1,37 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using SamedayJob.Api.Data;
 using SamedayJob.Api.Models;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add minimal OpenAPI support
+// Add services to the container
 builder.Services.AddOpenApi();
-
-// Add controllers support
 builder.Services.AddControllers();
 
 // Add EF Core with SQLite
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite("Data Source=samedayjob.db"));
+
+//Add JWT Authetication
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(builder.Configuration["Jwt:key"])
+            )
+        };
+    });
 
 // Add password hasher service
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
