@@ -1,16 +1,17 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Navbar.css';
 
 const Navbar: React.FC = () => {
   return (
     <header className="header">
-    <h1 className="logo">SameDayJob</h1>
-    <nav className="nav">
-      <p className="nav-button">Find Job</p>
-      <p className="nav-button">Create Job</p>
-      <p className="nav-button">Login</p>
-    </nav>
-  </header>
+      <Link to="/" className="logo">SameDayJob</Link>
+      <nav className="nav">
+        <Link to="/find-job" className="nav-button">Find Job</Link>
+        <Link to="/create-job" className="nav-button">Create Job</Link>
+        <Link to="/login" className="nav-button">Login</Link>
+      </nav>
+    </header>
   );
 };
 
