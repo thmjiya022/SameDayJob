@@ -4,7 +4,7 @@ import './Home.css';
 const Dashboard: React.FC = () => {
 
   const user = {
-    name: "John Doe",
+    name: "Thobani Mjiyakho",
     rating: 4.8,
     completedJobs: 24,
     memberSince: "2024"
