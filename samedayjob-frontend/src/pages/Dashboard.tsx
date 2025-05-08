@@ -2,7 +2,7 @@ import React from 'react';
 import './Home.css'; 
 
 const Dashboard: React.FC = () => {
-  // Mock user data
+
   const user = {
     name: "John Doe",
     rating: 4.8,
@@ -10,13 +10,11 @@ const Dashboard: React.FC = () => {
     memberSince: "2024"
   };
 
-  // Mock active jobs
   const activeJobs = [
     { id: 1, title: "Garden Cleanup", worker: "T Tefera", date: "Today, 2pm", status: "In Progress" },
     { id: 2, title: "Furniture Assembly", worker: "D Pillay", date: "Tomorrow, 10am", status: "Scheduled" }
   ];
 
-  // Mock recent activity
   const recentActivity = [
     { id: 1, message: "T Tefera accepted your Garden Cleanup job", time: "2 hours ago" },
     { id: 2, message: "You rated N Stevens 5 stars for Cleaning", time: "3 days ago" }
