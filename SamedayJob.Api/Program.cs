@@ -1,9 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using SamedayJob.Api.Data;
-using SamedayJob.Api.Models;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
