@@ -3,10 +3,17 @@ import { Link } from 'react-router-dom';
 import { logout } from '../services/authService';
 import './Navbar.css';
 
-interface NavbarProps {
-    user: any;
+interface User {
+    id: string;
+    name: string;
+    email: string
+    phoneNumber: string
 }
 
+interface NavbarProps {
+    user: User | null;
+}
+  
 const Navbar: React.FunctionComponent<NavbarProps> = ({ user }) => {
 
     const handleLogout = () => {

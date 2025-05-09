@@ -22,7 +22,6 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className="home-container">
-      {/* Welcome Section */}
       <section className="hero">
         <h2>Welcome back, {user.name}!</h2>
         <div className="user-stats">
@@ -41,7 +40,6 @@ const Dashboard: React.FC = () => {
         </div>
       </section>
 
-      {/* Active Jobs Section */}
       <section className="how-it-works">
         <h2>Your Active Jobs</h2>
         <div className="steps">
@@ -59,7 +57,6 @@ const Dashboard: React.FC = () => {
         </div>
       </section>
 
-      {/* Quick Actions */}
       <section className="categories">
         <h2>Quick Actions</h2>
         <div className="category-grid">
@@ -70,7 +67,6 @@ const Dashboard: React.FC = () => {
         </div>
       </section>
 
-      {/* Recent Activity */}
       <section className="taskers">
         <h2>Recent Activity</h2>
         <div className="tasker-grid">
@@ -83,7 +79,6 @@ const Dashboard: React.FC = () => {
         </div>
       </section>
 
-      {/* Recommended Workers */}
       <section className="how-it-works">
         <h2>Recommended Workers</h2>
         <div className="steps">
@@ -108,7 +103,6 @@ const Dashboard: React.FC = () => {
         </div>
       </section>
 
-      {/* App Download (same as home) */}
       <section className="app-download">
         <h2>Download Our App</h2>
         <p>Get SameDayJob on iOS and Android. Book tasks, chat with workers, and track jobs from your phone.</p>
