@@ -1,10 +1,10 @@
 import React from 'react';
 import './Home.css';
+import Footer from '../components/Footer';
 
 const Home: React.FC = () => {
   return (
     <div className="home-container">
-
       <section className="hero">
         <h2>Get Help or Earn Money Today</h2>
         <p>Post tasks or find work in your local area. It's fast, easy, and secure.</p>
@@ -89,9 +89,7 @@ const Home: React.FC = () => {
         </ul>
       </section>
 
-      <footer className="footer">
-        <p>© 2025 GameDayJob. All rights reserved.</p>
-      </footer>
+      <Footer />
     </div>
   );
 };

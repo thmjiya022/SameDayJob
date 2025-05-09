@@ -51,3 +51,5 @@ Connect with local workers for short-term jobs like cleaning, gardening, moving,
 - Node.js 18+
 - Xcode/Android Studio (for mobile)
 - Firebase project
+
+

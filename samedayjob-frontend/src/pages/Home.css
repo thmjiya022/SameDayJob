@@ -231,15 +231,6 @@ body {
     left: 0;
   }
   
-  /* Footer */
-  .footer {
-    text-align: center;
-    padding: 20px 0;
-    border-top: 1px solid #eee;
-    margin-top: 40px;
-    color: #666;
-  }
-  
   /* Responsive Design */
   @media (max-width: 768px) {
     .steps, .category-grid, .tasker-grid {
