@@ -44,7 +44,6 @@ export const login = async (data: LoginData) => {
     }
 
     const result = await response.json();
-    // Store the token in localStorage
     localStorage.setItem('token', result.token);
     return result;
 };
@@ -52,9 +51,6 @@ export const login = async (data: LoginData) => {
 export const getCurrentUser = () => {
     const token = localStorage.getItem('token');
     if (!token) return null;
-    
-    // In a real app, you would decode the JWT to get user info
-    // For now, we'll just return that we have a token
     return { token };
 };
 

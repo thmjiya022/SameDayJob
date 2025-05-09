@@ -7,10 +7,11 @@ interface NavbarProps {
     user: any;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ user }) => {
+const Navbar: React.FunctionComponent<NavbarProps> = ({ user }) => {
+
     const handleLogout = () => {
         logout();
-        window.location.href = '/login'; // Force refresh to update state
+        window.location.href = '/login';
     };
 
     return (
