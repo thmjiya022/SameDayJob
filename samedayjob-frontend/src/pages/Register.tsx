@@ -3,29 +3,32 @@ import './Auth.css';
 import { register } from '../services/authService';
 import { useNavigate } from 'react-router-dom';
 
-const Register: React.FC = () => {
+function Register() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [error, setError] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+    const [successMessage, setSuccessMessage] = useState('')
     const navigate = useNavigate();
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setError('');
-        
+    const handleSubmit = async (formEvent: React.FormEvent) => {
+        formEvent.preventDefault();
+        setErrorMessage('');
+        setSuccessMessage('');
+
         if (password !== confirmPassword) {
-            setError('Passwords do not match');
+            setErrorMessage('Passwords do not match');
             return;
         }
 
         try {
             await register({ name, email, phoneNumber, password });
-            navigate('/login');
-        } catch (err) {
-            setError(err instanceof Error ? err.message : 'Registration failed');
+            setSuccessMessage("Account created successfully!");
+            setTimeout(() => navigate('/login'), 2000);
+        } catch (error) {
+            setErrorMessage(error instanceof Error ? error.message : 'Registration failed');
         }
     };
 
@@ -34,7 +37,8 @@ const Register: React.FC = () => {
             <div className="auth-card">
                 <h2>Create an Account</h2>
                 
-                {error && <div className="error-message">{error}</div>}
+                {errorMessage && <div className="error-message">{errorMessage}</div>}
+                {successMessage && <div className="suc"></div>}
                 
                 <form className="auth-form" onSubmit={handleSubmit}>
                     <div className="form-group">
