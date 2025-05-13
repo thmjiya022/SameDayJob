@@ -4,30 +4,43 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Dashboard from './pages/Dashboard';
 import { getCurrentUser } from './services/authService';
-
 import './App.css';
 
 function App() {
     const [user, setUser] = useState<any>(null);
 
     useEffect(() => {
-        const currentUser = getCurrentUser();
-        setUser(currentUser);
+        const fetchUser = async () => {
+            try{
+                const currentUser = await getCurrentUser();
+                setUser(currentUser)
+            } catch (error) {
+                setUser(null)
+            }     
+        };
+        fetchUser();
     }, []);
+
+    const handleLogout = () => {
+        setUser(null);
+    }
 
     return (
         <Router>
 
             <div className="App">
 
-                <Navbar user={user} />
+                <Navbar user={user} onLogout={handleLogout}/>
 
                 <main className="main-content">
                     <Routes>
                         <Route path="/" element={<Home />} />
+                        <Route path="/dashboard" element={<Dashboard />}/>
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
+                        <Route path="/logout" element={<Home />}></Route>
                     </Routes>
                 </main>
 

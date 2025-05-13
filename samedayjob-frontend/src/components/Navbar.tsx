@@ -1,26 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { logout } from '../services/authService';
 import './Navbar.css';
 
 interface User {
     id: string;
     name: string;
-    email: string
-    phoneNumber: string
+    email: string;
+    phoneNumber: string;
 }
 
 interface NavbarProps {
     user: User | null;
+    onLogout: () => void;
 }
-  
-const Navbar: React.FunctionComponent<NavbarProps> = ({ user }) => {
 
-    const handleLogout = () => {
-        logout();
-        window.location.href = '/login';
-    };
-
+const Navbar: React.FunctionComponent<NavbarProps> = ({ user, onLogout }) => {
     return (
         <nav className="navbar">
             <div className="navbar-brand">
@@ -30,7 +24,7 @@ const Navbar: React.FunctionComponent<NavbarProps> = ({ user }) => {
                 {user ? (
                     <>
                         <Link to="/profile">Profile</Link>
-                        <button onClick={handleLogout} className="logout-button">
+                        <button onClick={onLogout} className="logout-button">
                             Logout
                         </button>
                     </>
