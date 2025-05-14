@@ -3,7 +3,7 @@ import './Auth.css';
 import { login } from '../services/authService';
 import { useNavigate } from 'react-router-dom';
 
-const Login: React.FC = () => {
+const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');

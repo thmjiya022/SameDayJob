@@ -3,7 +3,7 @@ import './Auth.css';
 import { register } from '../services/authService';
 import { useNavigate } from 'react-router-dom';
 
-function Register() {
+const Register = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');

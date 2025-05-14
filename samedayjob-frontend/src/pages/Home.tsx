@@ -1,7 +1,7 @@
 import "./Home.css";
 import  Footer from "../components/Footer"
 
-function Home() {
+const Home = () =>  {
     return (
       <div className="home-container">
 

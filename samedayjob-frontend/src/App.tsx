@@ -8,13 +8,13 @@ import Dashboard from './pages/Dashboard';
 import { getCurrentUser } from './services/authService';
 import './App.css';
 
-function App() {
+const App = () => {
     const [user, setUser] = useState<any>(null);
 
     useEffect(() => {
         const fetchUser = async () => {
             try{
-                const currentUser = await getCurrentUser();
+                const currentUser = getCurrentUser();
                 setUser(currentUser)
             } catch (error) {
                 setUser(null)
@@ -37,7 +37,7 @@ function App() {
                 <main className="main-content">
                     <Routes>
                         <Route path="/" element={<Home />} />
-                        <Route path="/dashboard" element={<Dashboard />}/>
+                        <Route path="/dashboard" element={<Dashboard user={user}/>}/>
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
                         <Route path="/logout" element={<Home />}></Route>

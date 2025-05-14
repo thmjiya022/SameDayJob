@@ -1,14 +1,14 @@
-import React from 'react';
 import './Home.css'; 
 
-const Dashboard: React.FC = () => {
+type User = {
+  name: string;
+}
 
-  const user = {
-    name: "Thobani Mjiyakho",
-    rating: 4.8,
-    completedJobs: 24,
-    memberSince: "2024"
-  };
+type UserProps = {
+  user : User
+}
+
+const Dashboard = ({ user } : UserProps) => {
 
   const activeJobs = [
     { id: 1, title: "Garden Cleanup", worker: "T Tefera", date: "Today, 2pm", status: "In Progress" },
@@ -24,7 +24,7 @@ const Dashboard: React.FC = () => {
     <div className="home-container">
       <section className="hero">
         <h2>Welcome back, {user.name}!</h2>
-        <div className="user-stats">
+        {/* <div className="user-stats">
           <div className="stat-card">
             <h3>Rating</h3>
             <p>{user.rating} ★</p>
@@ -37,7 +37,7 @@ const Dashboard: React.FC = () => {
             <h3>Member Since</h3>
             <p>{user.memberSince}</p>
           </div>
-        </div>
+        </div> */}
       </section>
 
       <section className="how-it-works">
