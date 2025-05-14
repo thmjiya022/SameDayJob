@@ -6,15 +6,12 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container
 builder.Services.AddOpenApi();
 builder.Services.AddControllers();
 
-// Add EF Core with SQLite
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite("Data Source=samedayjob.db"));
 
-//Add JWT Authetication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -32,7 +29,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 
 
-// Add CORS policy
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
@@ -46,13 +42,11 @@ builder.Services.AddCors(options =>
 var app = builder.Build();
 
 
-// Use OpenAPI in development
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
 
-// Enable CORS before routing
 app.UseCors("AllowFrontend");
 app.UseHttpsRedirection();
 app.UseAuthentication();
