@@ -9,56 +9,68 @@ namespace SamedayJob.Api.Controllers;
 [Route("api/[controller]")]
 public class UsersController : ControllerBase
 {
-    private readonly AppDbContext _context;
+    private readonly AppDbContext _dbContext;
 
     public UsersController(AppDbContext context)
     {
-        _context = context;
+        _dbContext = context;
     }
 
-    // GET: api/Users
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<User>>> GetAll()
+    public async Task<ActionResult<IEnumerable<User>>> GetUsersAsync()
     {
-        return await _context.Users.ToListAsync();
+        return await _dbContext.Users.ToListAsync();
     }
 
-    // GET: api/Users/5
     [HttpGet("{id}")]
-    public async Task<ActionResult<User>> GetById(int id)
+    public async Task<ActionResult<User>> GetUserByIdAsync(int id)
     {
-        var item = await _context.Users.FindAsync(id);
-        if (item == null) return NotFound();
-        return item;
+        var user = await _dbContext.Users.FindAsync(id);
+
+        if (user == null) 
+        {
+            return NotFound();
+        }
+
+        return user;
     }
 
-    // POST: api/Users
     [HttpPost]
-    public async Task<ActionResult<User>> Create(User item)
+    public async Task<ActionResult<User>> CreateUserAsync(User newUser)
     {
-        _context.Users.Add(item);
-        await _context.SaveChangesAsync();
-        return CreatedAtAction(nameof(GetById), new { id = item.UserID }, item);
+        _dbContext.Users.Add(newUser);
+        await _dbContext.SaveChangesAsync();
+
+        return CreatedAtAction(nameof(GetUserByIdAsync), new { id = newUser.UserID }, newUser);
     }
 
-    // PUT: api/Users/5
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update(int id, User item)
+    public async Task<IActionResult> UpdateUserAsync(int id, User updatedUser)
     {
-        if (id != item.UserID) return BadRequest();
-        _context.Entry(item).State = EntityState.Modified;
-        await _context.SaveChangesAsync();
+        if (id != updatedUser.UserID) 
+        {
+            return BadRequest();
+        }
+
+        _dbContext.Entry(updatedUser).State = EntityState.Modified;
+        await _dbContext.SaveChangesAsync();
+
         return NoContent();
     }
 
-    // DELETE: api/Users/5
     [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(int id)
+    public async Task<IActionResult> DeleteUserAsync(int id)
     {
-        var item = await _context.Users.FindAsync(id);
-        if (item == null) return NotFound();
-        _context.Users.Remove(item);
-        await _context.SaveChangesAsync();
+        var user = await _dbContext.Users.FindAsync(id);
+
+        if(user == null)
+        {
+            return NotFound();
+        }
+
+        _dbContext.Users.Remove(user);
+        await _dbContext.SaveChangesAsync();
+
         return NoContent();
     }
 }

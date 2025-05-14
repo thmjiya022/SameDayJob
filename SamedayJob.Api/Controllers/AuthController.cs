@@ -24,17 +24,22 @@ namespace SamedayJob.Api.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register(RegisterDto dto)
+        public async Task<IActionResult> Register(RegisterDto registrationData)
         {
-            if (await _context.Users.AnyAsync(u => u.Email == dto.Email))
+            bool emailExists = await _context.Users.AnyAsync(
+                user => user.Email == registrationData.Email
+            );
+
+            if (emailExists){
                 return BadRequest("Email already exists.");
+            }
 
             var user = new User
             {
-                Name = dto.Name,
-                Email = dto.Email,
-                PhoneNumber = dto.PhoneNumber,
-                Password = BCrypt.Net.BCrypt.HashPassword(dto.Password),
+                Name = registrationData.Name,
+                Email = registrationData.Email,
+                PhoneNumber = registrationData.PhoneNumber,
+                Password = BCrypt.Net.BCrypt.HashPassword(registrationData.Password),
                 Role = "User"
             };
 
@@ -45,14 +50,23 @@ namespace SamedayJob.Api.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login(LoginDto dto)
+        public async Task<IActionResult> Login(LoginDto loginData)
         {
-            var user = await _context.Users.SingleOrDefaultAsync(u => u.Email == dto.Email);
-            if (user == null || !BCrypt.Net.BCrypt.Verify(dto.Password, user.Password))
-                return Unauthorized("Invalid credentials");
+            var existingUser = await _context.Users.SingleOrDefaultAsync(
+                user => user.Email == loginData.Email
+            );
 
-            var token = GenerateJwtToken(user);
-            return Ok(new { token });
+            bool isPasswordValid = existingUser != null && BCrypt.Net.BCrypt.Verify(
+                loginData.Password, existingUser.Password
+            );
+
+            if(!isPasswordValid){
+                return Unauthorized("Invalid credentials.");
+            }
+
+            var jwtToken = GenerateJwtToken(existingUser);
+
+            return Ok(new {token = jwtToken});
         }
 
         private string GenerateJwtToken(User user)
@@ -68,8 +82,8 @@ namespace SamedayJob.Api.Controllers
                 new Claim("name", user.Name)
             };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["Key"]));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["Key"]));
+            var creds = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(
                 issuer: jwtSettings["Issuer"],
