@@ -1,4 +1,4 @@
-# QuickTasker - On-Demand Local Services Platform
+# SamedayJob - On-Demand Local Services Platform
 
 Connect with local workers for short-term jobs like cleaning, gardening, moving, and repairs. A seamless solution for clients needing help and workers seeking flexible opportunities.
 
