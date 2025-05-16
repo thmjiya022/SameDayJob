@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 
@@ -14,7 +13,7 @@ interface NavbarProps {
     onLogout: () => void;
 }
 
-const Navbar: React.FunctionComponent<NavbarProps> = ({ user, onLogout }) => {
+const Navbar = ({ user, onLogout } : NavbarProps) => {
     return (
         <nav className="navbar">
             <div className="navbar-brand">
