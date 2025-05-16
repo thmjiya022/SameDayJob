@@ -1,14 +1,6 @@
 import './Home.css'; 
 
-type User = {
-  name: string;
-}
-
-type UserProps = {
-  user : User
-}
-
-const Dashboard = ({ user } : UserProps) => {
+const Dashboard = () => {
 
   const activeJobs = [
     { id: 1, title: "Garden Cleanup", worker: "T Tefera", date: "Today, 2pm", status: "In Progress" },
@@ -23,8 +15,9 @@ const Dashboard = ({ user } : UserProps) => {
   return (
     <div className="home-container">
       <section className="hero">
-        <h2>Welcome back, {user.name}!</h2>
-        {/* <div className="user-stats">
+        
+        <h2>Welcome back, Thobani Mjiyakho!</h2>
+        {/* <div className="user-sts">
           <div className="stat-card">
             <h3>Rating</h3>
             <p>{user.rating} ★</p>

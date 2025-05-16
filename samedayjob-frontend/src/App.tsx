@@ -36,8 +36,10 @@ const App = () => {
 
                 <main className="main-content">
                     <Routes>
+                        
                         <Route path="/" element={<Home />} />
-                        <Route path="/dashboard" element={<Dashboard user={user}/>}/>
+                        
+                        <Route path="/dashboard" element={<Dashboard />}/>
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
                         <Route path="/logout" element={<Home />}></Route>
