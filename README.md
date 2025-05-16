@@ -33,7 +33,7 @@ Connect with local workers for short-term jobs like cleaning, gardening, moving,
 - Redux Toolkit
 
 ### **Backend**
-- ASP.NET Core 7 Web API
+- ASP.NET Core 9 Web API
 - Entity Framework Core
 - SQL Server (relational) + Redis (caching)
 - Firebase Authentication
@@ -47,7 +47,7 @@ Connect with local workers for short-term jobs like cleaning, gardening, moving,
 ## Getting Started
 
 ### Prerequisites
-- .NET 7 SDK
+- .NET 9 SDK
 - Node.js 18+
 - Xcode/Android Studio (for mobile)
 - Firebase project
