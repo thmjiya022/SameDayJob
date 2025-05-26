@@ -5956,19 +5956,19 @@
     ]
   },
   "packageFolders": {
-    "/home/thobani/.nuget/packages/": {}
+    "C:\\Users\\thomji\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/thobani/Desktop/SameDayJob/SamedayJob.Api/SamedayJob.Api.csproj",
+      "projectUniqueName": "C:\\Users\\thomji\\Documents\\SameDayJob\\SamedayJob.Api\\SamedayJob.Api.csproj",
       "projectName": "SamedayJob.Api",
-      "projectPath": "/home/thobani/Desktop/SameDayJob/SamedayJob.Api/SamedayJob.Api.csproj",
-      "packagesPath": "/home/thobani/.nuget/packages/",
-      "outputPath": "/home/thobani/Desktop/SameDayJob/SamedayJob.Api/obj/",
+      "projectPath": "C:\\Users\\thomji\\Documents\\SameDayJob\\SamedayJob.Api\\SamedayJob.Api.csproj",
+      "packagesPath": "C:\\Users\\thomji\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\thomji\\Documents\\SameDayJob\\SamedayJob.Api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/thobani/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\thomji\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
@@ -5992,7 +5992,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.200"
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net9.0": {
@@ -6054,7 +6054,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.202/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

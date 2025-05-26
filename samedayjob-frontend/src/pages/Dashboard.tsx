@@ -1,7 +1,17 @@
-import './Home.css'; 
+import './Home.css';
 
-const Dashboard = () => {
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  phoneNumber: string;
+}
 
+interface DashboardProps {
+  user: User;
+}
+
+const Dashboard = ({ user }: DashboardProps) => {
   const activeJobs = [
     { id: 1, title: "Garden Cleanup", worker: "T Tefera", date: "Today, 2pm", status: "In Progress" },
     { id: 2, title: "Furniture Assembly", worker: "D Pillay", date: "Tomorrow, 10am", status: "Scheduled" }
@@ -15,22 +25,7 @@ const Dashboard = () => {
   return (
     <div className="home-container">
       <section className="hero">
-        
-        <h2>Welcome back, Thobani Mjiyakho!</h2>
-        {/* <div className="user-sts">
-          <div className="stat-card">
-            <h3>Rating</h3>
-            <p>{user.rating} ★</p>
-          </div>
-          <div className="stat-card">
-            <h3>Jobs Completed</h3>
-            <p>{user.completedJobs}</p>
-          </div>
-          <div className="stat-card">
-            <h3>Member Since</h3>
-            <p>{user.memberSince}</p>
-          </div>
-        </div> */}
+        <h2>Welcome back, {user.name}!</h2>
       </section>
 
       <section className="how-it-works">
@@ -106,7 +101,7 @@ const Dashboard = () => {
       </section>
 
       <footer className="footer">
-        <p>© 2025 GameDayJob. All rights reserved.</p>
+        <p>© 2025 SameDayJob. All rights reserved.</p>
       </footer>
     </div>
   );

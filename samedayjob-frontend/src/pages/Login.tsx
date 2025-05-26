@@ -3,7 +3,11 @@ import './Auth.css';
 import { login } from '../services/authService';
 import { useNavigate } from 'react-router-dom';
 
-const Login = () => {
+interface LoginProps {
+    onLogin: () => void;
+}
+
+const Login = ({ onLogin }: LoginProps) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -15,6 +19,7 @@ const Login = () => {
         
         try {
             await login({ email, password });
+            onLogin();
             navigate('/dashboard');
         } catch (err) {
             setError(err instanceof Error ? err.message : 'Login failed');

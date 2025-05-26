@@ -52,23 +52,23 @@ export const login = async (data: LoginData) => {
     }
 
     const result = await response.json();
+
     localStorage.setItem('token', result.token);
+    localStorage.setItem('user', JSON.stringify(result.user))
 
     return result;
 };
 
 export const getCurrentUser = () => {
-    const token = localStorage.getItem('token');
-
-    if (!token) 
-    {
-        return null;
+    const user = localStorage.getItem('user');
+    if(!user){
+        return null
     }
 
-    return { token };
+    return JSON.parse(user);
 };
 
 export const logout = () => {
     localStorage.removeItem('token');
-
+    localStorage.removeItem('user');
 };

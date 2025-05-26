@@ -66,7 +66,17 @@ namespace SamedayJob.Api.Controllers
 
             var jwtToken = GenerateJwtToken(existingUser);
 
-            return Ok(new {token = jwtToken});
+            return Ok(new 
+            {
+                token = jwtToken,
+                user = new {
+                    existingUser.UserID,
+                    existingUser.Name,
+                    existingUser.Email,
+                    existingUser.PhoneNumber,
+                    existingUser.Role
+                }
+            });
         }
 
         private string GenerateJwtToken(User user)
