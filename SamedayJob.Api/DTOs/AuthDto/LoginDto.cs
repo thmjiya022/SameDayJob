@@ -1,4 +1,4 @@
-namespace SamedayJob.Api.DTOs;
+namespace SamedayJob.Api.DTOs.AuthDto;
 
 public class LoginDto
 {

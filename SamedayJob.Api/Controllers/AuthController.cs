@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using SamedayJob.Api.DTOs;
+using SamedayJob.Api.DTOs.AuthDto;
 using SamedayJob.Api.Data;
 using Microsoft.IdentityModel.Tokens;
 using SamedayJob.Api.Models;
