@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import './Auth.css';
-import { login } from '../services/authService';
+import '../Register/Auth.css'
+import { login } from '../../services/authService';
 import { useNavigate } from 'react-router-dom';
 
 interface LoginProps {
