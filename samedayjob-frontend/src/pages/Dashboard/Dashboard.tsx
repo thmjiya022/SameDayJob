@@ -17,7 +17,7 @@ interface DashboardProps {
 const Dashboard = ({ user }: DashboardProps) => {
   const activeJobs = [
     { id: 1, title: "Garden Cleanup", worker: "T Tefera", date: "Today, 2pm", status: "In Progress", price: "R250" },
-    { id: 2, title: "Furniture Assembly", worker: "D Pillay", date: "Tomorrow, 10am", status: "Scheduled", price: "R180" }
+    { id: 2, title: "Handyman", worker: "D Pillay", date: "Tomorrow, 10am", status: "Scheduled", price: "R180" }
   ];
 
   const recommendedTasks = [
@@ -57,7 +57,6 @@ const Dashboard = ({ user }: DashboardProps) => {
 
   return (
     <div className="dashboard-layout">
-      {/* Sidebar */}
       <aside className="sidebar">
         <div className="sidebar-header">
           <div className="sidebar-logo">SameDayJob</div>

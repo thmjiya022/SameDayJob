@@ -46,7 +46,7 @@ const Home = () =>  {
         </section>
   
         <section className="taskers">
-          <h2>Top-Rated Taskers Near You</h2>
+          <h2>Top-Rated Workers Near You</h2>
           <div className="tasker-grid">
             <div className="tasker-card">
               <h3>N Stevens</h3>
