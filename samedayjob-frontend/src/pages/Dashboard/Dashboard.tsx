@@ -17,7 +17,7 @@ interface DashboardProps {
 const Dashboard = ({ user }: DashboardProps) => {
   const activeJobs = [
     { id: 1, title: "Garden Cleanup", worker: "T Tefera", date: "Today, 2pm", status: "In Progress", price: "R250" },
-    { id: 2, title: "Handyman", worker: "D Pillay", date: "Tomorrow, 10am", status: "Scheduled", price: "R180" }
+    { id: 2, title: "Handyman", worker: "D Pillay", date: "Tomorrow, 10am", status: "Scheduled", price: "R180" },
   ];
 
   const recommendedTasks = [
