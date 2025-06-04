@@ -1,4 +1,3 @@
-// src/services/jobService.ts
 import { Job } from "../models/Job";
 
 const API_BASE_URL = 'http://localhost:5004/api/job';

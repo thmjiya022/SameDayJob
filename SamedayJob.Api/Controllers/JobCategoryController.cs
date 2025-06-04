@@ -16,6 +16,12 @@ public class JobCategoryController : ControllerBase
         _dbContext = context;
     }
 
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<JobCategory>>> GetAllJobCategoriesAsync()
+    {
+        return await _dbContext.JobCategories.ToListAsync();
+    }
+
     [HttpPost]
     public async Task<ActionResult> CreateJobCategory([FromBody] JobCategory category)
     {

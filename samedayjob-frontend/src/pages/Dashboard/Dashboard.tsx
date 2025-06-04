@@ -1,4 +1,9 @@
+// src/components/Dashboard.tsx
+import { useEffect, useState } from 'react';
 import './Dashboard.css';
+import { Job } from '../../models/Job';
+import { getActiveJobs } from '../../services/jobService';
+import PostJobForm from '../../components/PostJobForm/PostJobForm';
 
 interface User {
   id: string;
@@ -15,10 +20,36 @@ interface DashboardProps {
 }
 
 const Dashboard = ({ user }: DashboardProps) => {
-  const activeJobs = [
-    { id: 1, title: "Garden Cleanup", worker: "T Tefera", date: "Today, 2pm", status: "In Progress", price: "R250" },
-    { id: 2, title: "Handyman", worker: "D Pillay", date: "Tomorrow, 10am", status: "Scheduled", price: "R180" },
-  ];
+  const [activeJobs, setActiveJobs] = useState<Job[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [showJobForm, setShowJobForm] = useState(false);
+
+  useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        const jobs = await getActiveJobs();
+        setActiveJobs(jobs);
+      } catch (err) {
+        setError('Failed to load jobs. Please try again later.');
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchJobs();
+  }, []);
+
+  const handleJobCreated = () => {
+    setShowJobForm(false);
+
+    const fetchJobs = async () => {
+      const jobs = await getActiveJobs();
+      setActiveJobs(jobs);
+    };
+    fetchJobs();
+  };
 
   const recommendedTasks = [
     { id: 1, title: "Home Cleaning", category: "Cleaning", avgPrice: "R150-300", workers: 24 },
@@ -54,6 +85,46 @@ const Dashboard = ({ user }: DashboardProps) => {
     { id: 5, name: "Payments", active: false },
     { id: 6, name: "Settings", active: false }
   ];
+
+  if (loading) {
+    return (
+      <div className="dashboard-layout">
+        <aside className="sidebar">
+          {/* Sidebar content */}
+        </aside>
+        <main className="dashboard-container">
+          <div className="loading-message">Loading jobs...</div>
+        </main>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="dashboard-layout">
+        <aside className="sidebar">
+          {/* Sidebar content */}
+        </aside>
+        <main className="dashboard-container">
+          <div className="error-message">{error}</div>
+        </main>
+      </div>
+    );
+  }
+
+  // Format the jobs for display
+  const formattedJobs = activeJobs.map(job => ({
+    id: job.jobID,
+    title: job.title,
+    worker: "To be assigned",
+    date: new Date(job.postedAt).toLocaleDateString('en-US', {
+      weekday: 'long',
+      hour: '2-digit',
+      minute: '2-digit'
+    }),
+    status: job.status,
+    price: `R${job.budget.toFixed(2)}`
+  }));
 
   return (
     <div className="dashboard-layout">
@@ -126,30 +197,41 @@ const Dashboard = ({ user }: DashboardProps) => {
           <div className="post-job-card">
             <h3>Post a new job</h3>
             <p>Describe what you need done and get offers from skilled workers in minutes</p>
-            <button className="post-job-button">Post a Job</button>
+            <button 
+              className="post-job-button" 
+              onClick={() => setShowJobForm(true)}
+            >
+              Post a Job
+            </button>
           </div>
         </section>
 
         <section className="dashboard-section">
           <h2 className="section-title">Your Active Jobs</h2>
           <div className="jobs-grid">
-            {activeJobs.map(job => (
-              <div className={`job-card ${job.status.toLowerCase().replace(' ', '-')}`} key={job.id}>
-                <div className="job-header">
-                  <h3>{job.title}</h3>
-                  <span className="job-price">{job.price}</span>
+            {formattedJobs.length > 0 ? (
+              formattedJobs.map(job => (
+                <div className={`job-card ${job.status.toLowerCase().replace(' ', '-')}`} key={job.id}>
+                  <div className="job-header">
+                    <h3>{job.title}</h3>
+                    <span className="job-price">{job.price}</span>
+                  </div>
+                  <div className="job-details">
+                    <p><strong>Worker:</strong> {job.worker}</p>
+                    <p><strong>When:</strong> {job.date}</p>
+                    <p><strong>Status:</strong> <span className="status-badge">{job.status}</span></p>
+                  </div>
+                  <div className="job-actions">
+                    <button className="action-button message">Message</button>
+                    <button className="action-button details">View Details</button>
+                  </div>
                 </div>
-                <div className="job-details">
-                  <p><strong>Worker:</strong> {job.worker}</p>
-                  <p><strong>When:</strong> {job.date}</p>
-                  <p><strong>Status:</strong> <span className="status-badge">{job.status}</span></p>
-                </div>
-                <div className="job-actions">
-                  <button className="action-button message">Message</button>
-                  <button className="action-button details">View Details</button>
-                </div>
+              ))
+            ) : (
+              <div className="no-jobs-message">
+                You don't have any active jobs yet. Post a job to get started!
               </div>
-            ))}
+            )}
           </div>
         </section>
 
@@ -219,8 +301,21 @@ const Dashboard = ({ user }: DashboardProps) => {
         <section className="cta-section">
           <h2>Need something done? Post a job!</h2>
           <p>It's free and easy to post a job. Get started today.</p>
-          <button className="cta-button">Post a Job Now</button>
+          <button 
+            className="cta-button" 
+            onClick={() => setShowJobForm(true)}
+          >
+            Post a Job Now
+          </button>
         </section>
+
+        {showJobForm && (
+          <PostJobForm
+            userId={parseInt(user.id)}
+            onJobCreated={handleJobCreated}
+            onCancel={() => setShowJobForm(false)}
+          />
+        )}
       </main>
     </div>
   );
