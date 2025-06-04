@@ -23,8 +23,6 @@ const Dashboard = ({ user }: DashboardProps) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [showJobForm, setShowJobForm] = useState(false);
-  const [showJobWizard, setShowJobWizard] = useState(false);
-
 
   useEffect(() => {
     const fetchJobs = async () => {
