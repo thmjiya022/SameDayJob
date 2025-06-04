@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "3pztUS9YyCc=",
+  "dgSpecHash": "kcKZ1tK0ZVY=",
   "success": true,
   "projectFilePath": "C:\\Users\\thomji\\Documents\\SameDayJob\\SamedayJob.Api\\SamedayJob.Api.csproj",
   "expectedPackageFiles": [
@@ -77,6 +77,7 @@
     "C:\\Users\\thomji\\.nuget\\packages\\microsoft.win32.registry\\4.5.0\\microsoft.win32.registry.4.5.0.nupkg.sha512",
     "C:\\Users\\thomji\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
     "C:\\Users\\thomji\\.nuget\\packages\\mono.texttemplating\\3.0.0\\mono.texttemplating.3.0.0.nupkg.sha512",
+    "C:\\Users\\thomji\\.nuget\\packages\\scalar.aspnetcore\\2.4.8\\scalar.aspnetcore.2.4.8.nupkg.sha512",
     "C:\\Users\\thomji\\.nuget\\packages\\sqlitepclraw.bundle_e_sqlite3\\2.1.10\\sqlitepclraw.bundle_e_sqlite3.2.1.10.nupkg.sha512",
     "C:\\Users\\thomji\\.nuget\\packages\\sqlitepclraw.core\\2.1.10\\sqlitepclraw.core.2.1.10.nupkg.sha512",
     "C:\\Users\\thomji\\.nuget\\packages\\sqlitepclraw.lib.e_sqlite3\\2.1.10\\sqlitepclraw.lib.e_sqlite3.2.1.10.nupkg.sha512",

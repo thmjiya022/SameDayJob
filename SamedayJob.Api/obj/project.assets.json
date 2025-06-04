@@ -1506,6 +1506,22 @@
           "buildTransitive/Mono.TextTemplating.targets": {}
         }
       },
+      "Scalar.AspNetCore/2.4.8": {
+        "type": "package",
+        "compile": {
+          "lib/net9.0/Scalar.AspNetCore.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/Scalar.AspNetCore.dll": {
+            "related": ".xml"
+          }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
       "SQLitePCLRaw.bundle_e_sqlite3/2.1.10": {
         "type": "package",
         "dependencies": {
@@ -4640,6 +4656,23 @@
         "readme.md"
       ]
     },
+    "Scalar.AspNetCore/2.4.8": {
+      "sha512": "ff+lzCryEK5uTX5/A1KodiUpWeZZvkRH83N6KdfCdU/UToAigz8owALLYe6gtXh9h0KH/cbACGo5A8HdPntmGw==",
+      "type": "package",
+      "path": "scalar.aspnetcore/2.4.8",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "icon.png",
+        "lib/net8.0/Scalar.AspNetCore.dll",
+        "lib/net8.0/Scalar.AspNetCore.xml",
+        "lib/net9.0/Scalar.AspNetCore.dll",
+        "lib/net9.0/Scalar.AspNetCore.xml",
+        "scalar.aspnetcore.2.4.8.nupkg.sha512",
+        "scalar.aspnetcore.nuspec"
+      ]
+    },
     "SQLitePCLRaw.bundle_e_sqlite3/2.1.10": {
       "sha512": "UxWuisvZ3uVcVOLJQv7urM/JiQH+v3TmaJc1BLKl5Dxfm/nTzTUrqswCqg/INiYLi61AXnHo1M1JPmPqqLnAdg==",
       "type": "package",
@@ -5952,7 +5985,8 @@
       "Microsoft.EntityFrameworkCore.Design >= 9.0.4",
       "Microsoft.EntityFrameworkCore.SqlServer >= 9.0.4",
       "Microsoft.EntityFrameworkCore.Sqlite >= 9.0.4",
-      "Microsoft.EntityFrameworkCore.Tools >= 9.0.4"
+      "Microsoft.EntityFrameworkCore.Tools >= 9.0.4",
+      "Scalar.AspNetCore >= 2.4.8"
     ]
   },
   "packageFolders": {
@@ -6033,6 +6067,10 @@
             "suppressParent": "All",
             "target": "Package",
             "version": "[9.0.4, )"
+          },
+          "Scalar.AspNetCore": {
+            "target": "Package",
+            "version": "[2.4.8, )"
           }
         },
         "imports": [
