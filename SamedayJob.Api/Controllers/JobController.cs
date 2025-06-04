@@ -23,10 +23,9 @@ public class JobController : ControllerBase
         return await _dbContext.Jobs.ToListAsync();
     }
     
-    [HttpGet("{id}")]
+    [HttpGet("{id}", Name = "GetJobById")]
     public async Task<ActionResult<Job>> GetJobByIdAsync(int id)
     {
-
         var job = await _dbContext.Jobs.FindAsync(id);
 
         if (job == null)
@@ -35,7 +34,6 @@ public class JobController : ControllerBase
         }
 
         return job;
-
     }
 
     [HttpPost]
@@ -43,7 +41,7 @@ public class JobController : ControllerBase
     {
         if (!decimal.TryParse(jobDto.Budget, out var budget))
         {
-            return BadRequest("Invalid bidget value.");
+            return BadRequest("Invalid budget value.");
         }
 
         var newJob = new Job
@@ -61,6 +59,6 @@ public class JobController : ControllerBase
         _dbContext.Jobs.Add(newJob);
         await _dbContext.SaveChangesAsync();
 
-        return CreatedAtAction(nameof(GetJobByIdAsync), new { id = newJob.JobID }, newJob);
+        return CreatedAtRoute("GetJobById", new { id = newJob.JobID }, newJob);
     }
 }

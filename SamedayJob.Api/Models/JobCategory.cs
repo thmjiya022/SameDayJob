@@ -6,5 +6,5 @@ public class JobCategory
     public string Name { get; set; }
 
     // Navigation
-    public List<Job> Jobs { get; set; }
+    public List<Job>? Jobs { get; set; }
 }

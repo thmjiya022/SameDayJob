@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using SamedayJob.Api.Data;
 using SamedayJob.Api.Models;
 
-
 namespace SamedayJob.Api.Controllers;
 
 [Route("api/[controller]")]
@@ -42,6 +41,4 @@ public class JobCategoryController : ControllerBase
 
         return Ok(category);
     }
-
-
 }
