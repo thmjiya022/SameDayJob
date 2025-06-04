@@ -1,12 +1,16 @@
-// src/components/PostJobForm.tsx
-import { useState } from 'react';
-import { createJob } from '../../services/jobService';
-import "../../pages/Dashboard/Dashboard.css"
+import { useState, useEffect } from 'react';
+import { createJob, getJobCategories } from '../../services/jobService';
+import "../../pages/Dashboard/Dashboard.css";
 
 interface PostJobFormProps {
   userId: number;
   onJobCreated: () => void;
   onCancel: () => void;
+}
+
+interface JobCategory {
+  id: number;
+  name: string;
 }
 
 const PostJobForm = ({ userId, onJobCreated, onCancel }: PostJobFormProps) => {
@@ -15,18 +19,32 @@ const PostJobForm = ({ userId, onJobCreated, onCancel }: PostJobFormProps) => {
     description: '',
     budget: '',
     location: '',
-    categoryID: 1 
+    categoryID: 1
   });
+
+  const [jobCategories, setJobCategories] = useState<JobCategory[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
 
-  const jobCategories = [
-    { id: 1, name: 'Cleaning' },
-    { id: 2, name: 'Gardening' },
-    { id: 3, name: 'Handyman' },
-    { id: 4, name: 'Delivery' },
-    { id: 5, name: 'Assembly' }
-  ];
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const categories = await getJobCategories();
+        setJobCategories(categories);
+        if (categories.length > 0) {
+          setFormData(prev => ({
+            ...prev,
+            categoryID: categories[0].id
+          }));
+        }
+      } catch (err) {
+        console.error("Failed to fetch job categories:", err);
+        setError("Unable to load job categories. Please try again later.");
+      }
+    };
+
+    fetchCategories();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -67,7 +85,7 @@ const PostJobForm = ({ userId, onJobCreated, onCancel }: PostJobFormProps) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
-      [name]: value
+      [name]: name === "categoryID" ? Number(value) : value
     }));
   };
 
@@ -96,7 +114,7 @@ const PostJobForm = ({ userId, onJobCreated, onCancel }: PostJobFormProps) => {
               maxLength={100}
             />
           </div>
-          
+
           <div className="form-group">
             <label htmlFor="description">Description*</label>
             <textarea
@@ -109,7 +127,7 @@ const PostJobForm = ({ userId, onJobCreated, onCancel }: PostJobFormProps) => {
               maxLength={500}
             />
           </div>
-          
+
           <div className="form-row">
             <div className="form-group">
               <label htmlFor="budget">Budget (R)*</label>
@@ -122,7 +140,7 @@ const PostJobForm = ({ userId, onJobCreated, onCancel }: PostJobFormProps) => {
                 placeholder="e.g., 250 or 250.50"
               />
             </div>
-            
+
             <div className="form-group">
               <label htmlFor="location">Location*</label>
               <input
@@ -135,7 +153,7 @@ const PostJobForm = ({ userId, onJobCreated, onCancel }: PostJobFormProps) => {
               />
             </div>
           </div>
-          
+
           <div className="form-group">
             <label htmlFor="categoryID">Category*</label>
             <select
@@ -151,7 +169,7 @@ const PostJobForm = ({ userId, onJobCreated, onCancel }: PostJobFormProps) => {
               ))}
             </select>
           </div>
-          
+
           <div className="form-actions">
             <button 
               type="button" 

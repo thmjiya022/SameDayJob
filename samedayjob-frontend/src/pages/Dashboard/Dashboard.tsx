@@ -1,4 +1,3 @@
-// src/components/Dashboard.tsx
 import { useEffect, useState } from 'react';
 import './Dashboard.css';
 import { Job } from '../../models/Job';
@@ -24,6 +23,8 @@ const Dashboard = ({ user }: DashboardProps) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [showJobForm, setShowJobForm] = useState(false);
+  const [showJobWizard, setShowJobWizard] = useState(false);
+
 
   useEffect(() => {
     const fetchJobs = async () => {
@@ -90,7 +91,6 @@ const Dashboard = ({ user }: DashboardProps) => {
     return (
       <div className="dashboard-layout">
         <aside className="sidebar">
-          {/* Sidebar content */}
         </aside>
         <main className="dashboard-container">
           <div className="loading-message">Loading jobs...</div>
@@ -103,7 +103,6 @@ const Dashboard = ({ user }: DashboardProps) => {
     return (
       <div className="dashboard-layout">
         <aside className="sidebar">
-          {/* Sidebar content */}
         </aside>
         <main className="dashboard-container">
           <div className="error-message">{error}</div>
@@ -112,7 +111,6 @@ const Dashboard = ({ user }: DashboardProps) => {
     );
   }
 
-  // Format the jobs for display
   const formattedJobs = activeJobs.map(job => ({
     id: job.jobID,
     title: job.title,
