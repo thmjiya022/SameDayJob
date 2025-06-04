@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SamedayJob.Api.Data;
 using SamedayJob.Api.DTOs.JobDto;
 using SamedayJob.Api.Models;
@@ -15,7 +16,12 @@ public class JobController : ControllerBase
     {
         _dbContext = context;
     }
-    
+
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<Job>>> GetAllJobsAsync()
+    {
+        return await _dbContext.Jobs.ToListAsync();
+    }
     
     [HttpGet("{id}")]
     public async Task<ActionResult<Job>> GetJobByIdAsync(int id)
