@@ -1,8 +1,8 @@
-# QuickTasker - On-Demand Local Services Platform
+# SamedayJob - On-Demand Local Services Platform
 
 Connect with local workers for short-term jobs like cleaning, gardening, moving, and repairs. A seamless solution for clients needing help and workers seeking flexible opportunities.
 
-## 🌟 Key Features
+## Key Features
 
 ### **Core Functionality**
 | Feature | Description |
@@ -24,7 +24,7 @@ Connect with local workers for short-term jobs like cleaning, gardening, moving,
 - Client history and reviews
 - Verification badges
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 ### **Frontend**
 - React Native (iOS/Android) + React.js (Web)
@@ -33,7 +33,7 @@ Connect with local workers for short-term jobs like cleaning, gardening, moving,
 - Redux Toolkit
 
 ### **Backend**
-- ASP.NET Core 7 Web API
+- ASP.NET Core 9 Web API
 - Entity Framework Core
 - SQL Server (relational) + Redis (caching)
 - Firebase Authentication
@@ -44,14 +44,12 @@ Connect with local workers for short-term jobs like cleaning, gardening, moving,
 - GitHub Actions CI/CD
 - Sentry error monitoring
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
-- .NET 7 SDK
+- .NET 9 SDK
 - Node.js 18+
 - Xcode/Android Studio (for mobile)
 - Firebase project
 
-### Installation
-```bash
-# Clone repository
+
