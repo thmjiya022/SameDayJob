@@ -1290,3 +1290,123 @@
   margin-bottom: 1.5rem;
   font-size: 0.9rem;
 }
+
+/* Post Job Page Specific Styles */
+.post-job-form-container {
+  background: var(--white);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-xl);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--gray);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.post-job-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.post-job-form .form-group {
+  margin-bottom: 0;
+}
+
+.post-job-form label {
+  display: block;
+  margin-bottom: var(--spacing-sm);
+  font-weight: 600;
+  color: var(--dark-light);
+}
+
+.post-job-form input,
+.post-job-form textarea,
+.post-job-form select {
+  width: 100%;
+  padding: var(--spacing-md);
+  border: 1px solid var(--gray);
+  border-radius: var(--border-radius);
+  font-size: var(--font-size-base);
+  transition: var(--transition-fast);
+}
+
+.post-job-form input:focus,
+.post-job-form textarea:focus,
+.post-job-form select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px var(--primary-lighter);
+}
+
+.post-job-form textarea {
+  resize: vertical;
+  min-height: 150px;
+}
+
+.post-job-form select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right var(--spacing-md) center;
+  background-size: 1rem;
+}
+
+.form-row {
+  display: flex;
+  gap: var(--spacing-lg);
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-xl);
+}
+
+.cancel-btn {
+  padding: var(--spacing-md) var(--spacing-lg);
+  background-color: var(--gray-light);
+  color: var(--dark);
+  border: none;
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-normal);
+}
+
+.cancel-btn:hover {
+  background-color: var(--gray);
+}
+
+.submit-btn {
+  padding: var(--spacing-md) var(--spacing-lg);
+  background-color: var(--primary);
+  color: var(--white);
+  border: none;
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-normal);
+}
+
+.submit-btn:hover {
+  background-color: var(--primary-light);
+}
+
+.submit-btn:disabled {
+  background-color: var(--gray-dark);
+  cursor: not-allowed;
+}
+
+.error-message {
+  color: var(--danger);
+  background-color: var(--danger-light);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+  margin-bottom: var(--spacing-lg);
+  font-size: var(--font-size-sm);
+}

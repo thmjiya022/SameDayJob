@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react';
 import './Dashboard.css';
 import { Job } from '../../models/Job';
 import { getActiveJobs } from '../../services/jobService';
-import PostJobForm from '../../components/PostJobForm/PostJobForm';
+import { useNavigate } from 'react-router-dom';
+
+// import PostJobForm from '../../components/PostJobForm/PostJobForm';
 
 interface User {
   id: string;
@@ -19,10 +21,10 @@ interface DashboardProps {
 }
 
 const Dashboard = ({ user }: DashboardProps) => {
+  const navigate = useNavigate();
   const [activeJobs, setActiveJobs] = useState<Job[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [showJobForm, setShowJobForm] = useState(false);
 
   useEffect(() => {
     const fetchJobs = async () => {
@@ -39,16 +41,6 @@ const Dashboard = ({ user }: DashboardProps) => {
 
     fetchJobs();
   }, []);
-
-  const handleJobCreated = () => {
-    setShowJobForm(false);
-
-    const fetchJobs = async () => {
-      const jobs = await getActiveJobs();
-      setActiveJobs(jobs);
-    };
-    fetchJobs();
-  };
 
   const recommendedTasks = [
     { id: 1, title: "Home Cleaning", category: "Cleaning", avgPrice: "R150-300", workers: 24 },
@@ -77,13 +69,14 @@ const Dashboard = ({ user }: DashboardProps) => {
   ];
 
   const sidebarMenu = [
-    { id: 1, name: "Home", active: true },
-    { id: 2, name: "Messages", active: false, notifications: 3 },
-    { id: 3, name: "Jobs", active: false },
-    { id: 4, name: "Workers", active: false },
-    { id: 5, name: "Payments", active: false },
-    { id: 6, name: "Settings", active: false }
+    { id: 1, name: "Home", active: true, route: "/dashboard" },
+    { id: 2, name: "Messages", active: false, route: "/messages", notifications: 3 },
+    { id: 3, name: "Jobs", active: false, route: "/jobs" },
+    { id: 4, name: "Workers", active: false, route: "/workers" },
+    { id: 5, name: "Payments", active: false, route: "/payments" },
+    { id: 6, name: "Settings", active: false, route: "/settings" }
   ];
+
 
   if (loading) {
     return (
@@ -140,7 +133,12 @@ const Dashboard = ({ user }: DashboardProps) => {
         
         <nav className="sidebar-menu">
           {sidebarMenu.map(item => (
-            <div key={item.id} className={`menu-item ${item.active ? 'active' : ''}`}>
+            <div
+              key={item.id}
+              className={`menu-item ${item.active ? 'active' : ''}`}
+              onClick={() => navigate(item.route)}
+              style={{ cursor: 'pointer' }}
+            >
               <span className="menu-name">{item.name}</span>
               {item.notifications && (
                 <span className="menu-notification">{item.notifications}</span>
@@ -195,7 +193,7 @@ const Dashboard = ({ user }: DashboardProps) => {
             <p>Describe what you need done and get offers from skilled workers in minutes</p>
             <button 
               className="post-job-button" 
-              onClick={() => setShowJobForm(true)}
+               onClick={() => navigate('/post-job')}
             >
               Post a Job
             </button>
@@ -299,19 +297,20 @@ const Dashboard = ({ user }: DashboardProps) => {
           <p>It's free and easy to post a job. Get started today.</p>
           <button 
             className="cta-button" 
-            onClick={() => setShowJobForm(true)}
+             onClick={() => navigate('/post-job')}
           >
             Post a Job Now
           </button>
         </section>
-
+{/* 
         {showJobForm && (
           <PostJobForm
             userId={parseInt(user.id)}
             onJobCreated={handleJobCreated}
             onCancel={() => setShowJobForm(false)}
           />
-        )}
+        )} */}
+
       </main>
     </div>
   );
