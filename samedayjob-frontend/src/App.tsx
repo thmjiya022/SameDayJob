@@ -5,6 +5,7 @@ import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 import Dashboard from './pages/Dashboard/Dashboard';
+import PostJobPage from './pages/PostJob/PostJobPage';
 import { getCurrentUser, logout as performLogout } from './services/authService';
 import './App.css';
 
@@ -34,6 +35,7 @@ const App = () => {
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/dashboard" element={user ? <Dashboard user={user} /> : <Navigate to="/login" />} />
+                        <Route path="/post-job" element={user ? <PostJobPage user={user} /> : <Navigate to="/login" />} />
                         <Route path="/login" element={<Login onLogin={handleLogin} />} />
                         <Route path="/register" element={<Register />} />
                     </Routes>
