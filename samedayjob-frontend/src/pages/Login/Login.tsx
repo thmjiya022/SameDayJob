@@ -81,7 +81,7 @@ const Login = ({ onLogin }: LoginProps) => {
 
                     <button
                         type="submit"
-                        className="w-full bg-blue-800 text-white py-2 rounded-md font-semibold hover:bg-gray-900 transition"
+                        className="w-full bg-blue-800 text-white py-2 rounded-md font-semibold hover:bg-blue-900 transition"
                     >
                         Login
                     </button>
