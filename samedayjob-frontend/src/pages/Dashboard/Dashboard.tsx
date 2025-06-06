@@ -115,10 +115,6 @@ const Dashboard = ({ user }: DashboardProps) => {
   return (
     <div className="dashboard-layout">
       <aside className="sidebar">
-        <div className="sidebar-header">
-          <div className="sidebar-logo">SameDayJob {user.id}</div>
-          <button className="sidebar-close-btn">✕</button>
-        </div>
         
         <div className="sidebar-user">
           <div className="user-avatar">{user.name.charAt(0)}</div>
