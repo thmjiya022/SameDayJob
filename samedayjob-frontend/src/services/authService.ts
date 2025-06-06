@@ -1,15 +1,13 @@
 const API_URL = 'http://localhost:5004/api/auth';
 
-interface RegisterData 
-{
+interface RegisterData {
     name: string;
     email: string;
     phoneNumber: string;
     password: string;
 }
 
-interface LoginData 
-{
+interface LoginData {
     email: string;
     password: string;
 }

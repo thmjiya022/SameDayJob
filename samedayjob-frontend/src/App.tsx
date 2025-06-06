@@ -7,19 +7,16 @@ import Register from './pages/Register/Register';
 import Dashboard from './pages/Dashboard/Dashboard';
 import PostJobPage from './pages/PostJob/PostJobPage';
 import { getCurrentUser, logout as performLogout } from './services/authService';
-import './App.css';
 
 const App = () => {
     const [user, setUser] = useState<any>(null);
 
-    useEffect(() => {
-        const currentUser = getCurrentUser();
-        setUser(currentUser);
+    useEffect(()=> {
+        setUser(getCurrentUser());
     }, []);
 
     const handleLogin = () => {
-        const currentUser = getCurrentUser();
-        setUser(currentUser);
+        setUser(getCurrentUser());
     };
 
     const handleLogout = () => {
@@ -29,7 +26,7 @@ const App = () => {
 
     return (
         <Router>
-            <div className="App">
+            <div className="">
                 <Navbar user={user} onLogout={handleLogout} />
                 <main className="main-content">
                     <Routes>

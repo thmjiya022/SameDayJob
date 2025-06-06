@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import './Navbar.css';
 
 interface User {
-    id: string;
+    id: number;
     name: string;
     email: string;
     phoneNumber: string;

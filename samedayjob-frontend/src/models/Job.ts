@@ -2,7 +2,7 @@ export interface Job {
   jobID: number;
   title: string;
   description: string;
-  budget: number;
+  budget: string;
   location: string;
   categoryID: number;
   postedBy: number;

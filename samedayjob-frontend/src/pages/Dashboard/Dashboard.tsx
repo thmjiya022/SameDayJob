@@ -4,10 +4,8 @@ import { Job } from '../../models/Job';
 import { getActiveJobs } from '../../services/jobService';
 import { useNavigate } from 'react-router-dom';
 
-// import PostJobForm from '../../components/PostJobForm/PostJobForm';
-
 interface User {
-  id: string;
+  id: number;
   name: string;
   email: string;
   phoneNumber: string;
@@ -77,7 +75,6 @@ const Dashboard = ({ user }: DashboardProps) => {
     { id: 6, name: "Settings", active: false, route: "/settings" }
   ];
 
-
   if (loading) {
     return (
       <div className="dashboard-layout">
@@ -112,14 +109,14 @@ const Dashboard = ({ user }: DashboardProps) => {
       minute: '2-digit'
     }),
     status: job.status,
-    price: `R${job.budget.toFixed(2)}`
+    price: `R${job.budget}`
   }));
 
   return (
     <div className="dashboard-layout">
       <aside className="sidebar">
         <div className="sidebar-header">
-          <div className="sidebar-logo">SameDayJob</div>
+          <div className="sidebar-logo">SameDayJob {user.id}</div>
           <button className="sidebar-close-btn">✕</button>
         </div>
         
@@ -128,6 +125,7 @@ const Dashboard = ({ user }: DashboardProps) => {
           <div className="user-info">
             <div className="user-name">{user.name}</div>
             <div className="user-email">{user.email}</div>
+          
           </div>
         </div>
         
@@ -302,14 +300,6 @@ const Dashboard = ({ user }: DashboardProps) => {
             Post a Job Now
           </button>
         </section>
-{/* 
-        {showJobForm && (
-          <PostJobForm
-            userId={parseInt(user.id)}
-            onJobCreated={handleJobCreated}
-            onCancel={() => setShowJobForm(false)}
-          />
-        )} */}
 
       </main>
     </div>

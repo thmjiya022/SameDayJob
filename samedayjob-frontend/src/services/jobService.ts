@@ -3,6 +3,20 @@ import axios from 'axios';
 
 const API_BASE_URL = 'http://localhost:5004/api';
 
+interface JobCategory {
+  id: number;
+  name: string;
+}
+
+interface JobCreateRequest {
+  title: string;
+  description: string;
+  budget: string;
+  location: string;
+  categoryID: number;
+  postedBy: number;
+}
+
 export const getActiveJobs = async (): Promise<Job[]> => {
   try {
     const response = await fetch(`${API_BASE_URL}/job`);
@@ -15,11 +29,6 @@ export const getActiveJobs = async (): Promise<Job[]> => {
     return [];
   }
 };
-
-interface JobCategory {
-  id: number;
-  name: string;
-}
 
 export const getJobCategories = async (): Promise<JobCategory[]> => {
   try {
@@ -44,30 +53,24 @@ export const getJobById = async (id: number): Promise<Job | null> => {
   }
 };
 
-export const createJob = async (jobData: {
-  title: string;
-  description: string;
-  budget: string;
-  location: string;
-  categoryID: number;
-  postedBy: number;
-}): Promise<Job | null> => {
+export const createJob = async (jobData: JobCreateRequest): Promise<Job | null> => {
   try {
-    const response = await fetch(`${API_BASE_URL}/job`, {
+      const response = await fetch(`${API_BASE_URL}/job`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(jobData),
+      body: JSON.stringify(jobData)
     });
+
+    console.log(jobData);
 
     if (!response.ok) {
       throw new Error('Failed to create job');
     }
-
-    return await response.json();
-  } catch (error) {
-    console.error('Error creating job:', error);
-    return null;
-  }
+      return await response.json();
+    } catch (error) {
+      console.error('Error creating job:', error);
+      return null;
+    }
 };

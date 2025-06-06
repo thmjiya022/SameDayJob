@@ -9,13 +9,10 @@ interface JobCategory {
 }
 
 interface User {
-  id: string;
+  id: number;
   name: string;
   email: string;
   phoneNumber: string;
-  rating?: number;
-  completedJobs?: number;
-  avatar?: string;
 }
 
 interface PostJobPageProps {
@@ -29,7 +26,7 @@ const PostJobPage = ({ user }: PostJobPageProps) => {
     description: '',
     budget: '',
     location: '',
-    categoryID: 1
+    categoryID: 1,
   });
 
   const [jobCategories, setJobCategories] = useState<JobCategory[]>([]);
@@ -56,18 +53,30 @@ const PostJobPage = ({ user }: PostJobPageProps) => {
     fetchCategories();
   }, []);
 
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: name === 'categoryID' ? Number(value) : value
+    }));
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setError('');
 
-    if (!formData.title.trim() || !formData.description.trim() || !formData.budget.trim() || !formData.location.trim()) {
+    const { title, description, budget, location } = formData;
+
+    if (!title.trim() || !description.trim() || !budget.trim() || !location.trim()) {
       setError('Please fill in all required fields');
       setIsSubmitting(false);
       return;
     }
 
-    if (!/^\d+(\.\d{1,2})?$/.test(formData.budget)) {
+    if (!/^\d+(\.\d{1,2})?$/.test(budget)) {
       setError('Please enter a valid budget amount (e.g., 250 or 250.50)');
       setIsSubmitting(false);
       return;
@@ -75,12 +84,8 @@ const PostJobPage = ({ user }: PostJobPageProps) => {
 
     try {
       await createJob({
-        title: formData.title,
-        description: formData.description,
-        budget: formData.budget,
-        location: formData.location,
-        categoryID: formData.categoryID,
-        postedBy: parseInt(user.id)
+        ...formData,
+        postedBy: user.id,
       });
       navigate('/dashboard');
     } catch (err) {
@@ -91,14 +96,6 @@ const PostJobPage = ({ user }: PostJobPageProps) => {
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: name === "categoryID" ? Number(value) : value
-    }));
-  };
-
   return (
     <div className="dashboard-layout">
       <aside className="sidebar">
@@ -106,7 +103,7 @@ const PostJobPage = ({ user }: PostJobPageProps) => {
           <div className="sidebar-logo">SameDayJob</div>
           <button className="sidebar-close-btn">✕</button>
         </div>
-        
+
         <div className="sidebar-user">
           <div className="user-avatar">{user.name.charAt(0)}</div>
           <div className="user-info">
@@ -114,16 +111,11 @@ const PostJobPage = ({ user }: PostJobPageProps) => {
             <div className="user-email">{user.email}</div>
           </div>
         </div>
-        
+
         <nav className="sidebar-menu">
-          <div className="menu-item">
-            <span className="menu-name" 
-                onClick={() => navigate('/dashboard')}
-            >
-                Home
-            </span>
+          <div className="menu-item" onClick={() => navigate('/dashboard')}>
+            <span className="menu-name">Home</span>
           </div>
-          
           <div className="menu-item">
             <span className="menu-name">Messages</span>
           </div>
@@ -146,7 +138,9 @@ const PostJobPage = ({ user }: PostJobPageProps) => {
         <section className="welcome-section">
           <div className="welcome-content">
             <h1>Post a New Job</h1>
-            <p>Describe what you need done and get offers from skilled workers in minutes</p>
+            <p>
+              Describe what you need done and get offers from skilled workers in minutes
+            </p>
           </div>
         </section>
 
@@ -224,16 +218,16 @@ const PostJobPage = ({ user }: PostJobPageProps) => {
               </div>
 
               <div className="form-actions">
-                <button 
-                  type="button" 
+                <button
+                  type="button"
                   className="cancel-btn"
                   onClick={() => navigate('/dashboard')}
                   disabled={isSubmitting}
                 >
                   Cancel
                 </button>
-                <button 
-                  type="submit" 
+                <button
+                  type="submit"
                   className="submit-btn"
                   disabled={isSubmitting}
                 >
