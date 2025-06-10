@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createJob, getJobCategories } from '../../services/jobService';
-import '../Dashboard/Dashboard.css';
+import Sidebar from '../../components/Sidebar/Sidebar';
 
 interface JobCategory {
   id: number;
@@ -54,8 +54,7 @@ const PostJobPage = ({ user }: PostJobPageProps) => {
   }, []);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-  ) => {
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
@@ -97,60 +96,26 @@ const PostJobPage = ({ user }: PostJobPageProps) => {
   };
 
   return (
-    <div className="dashboard-layout">
-      <aside className="sidebar">
-        <div className="sidebar-header">
-          <div className="sidebar-logo">SameDayJob</div>
-          <button className="sidebar-close-btn">✕</button>
-        </div>
+    <div className="flex min-h-screen bg-white text-gray-800">
+      <Sidebar user={user} />
 
-        <div className="sidebar-user">
-          <div className="user-avatar">{user.name.charAt(0)}</div>
-          <div className="user-info">
-            <div className="user-name">{user.name}</div>
-            <div className="user-email">{user.email}</div>
-          </div>
-        </div>
-
-        <nav className="sidebar-menu">
-          <div className="menu-item" onClick={() => navigate('/dashboard')}>
-            <span className="menu-name">Home</span>
-          </div>
-          <div className="menu-item">
-            <span className="menu-name">Messages</span>
-          </div>
-          <div className="menu-item active">
-            <span className="menu-name">Jobs</span>
-          </div>
-          <div className="menu-item">
-            <span className="menu-name">Workers</span>
-          </div>
-          <div className="menu-item">
-            <span className="menu-name">Payments</span>
-          </div>
-          <div className="menu-item">
-            <span className="menu-name">Settings</span>
-          </div>
-        </nav>
-      </aside>
-
-      <main className="dashboard-container">
-        <section className="welcome-section">
-          <div className="welcome-content">
-            <h1>Post a New Job</h1>
-            <p>
-              Describe what you need done and get offers from skilled workers in minutes
+      <main className="flex-1 flex items-center justify-center p-8 bg-gray-100">
+        <div className="w-full max-w-3xl space-y-8">
+          <section className="text-center">
+            <h1 className="text-3xl font-bold text-blue-700 mb-2">Post a New Job</h1>
+            <p className="text-gray-600">
+              Describe what you need done and get offers from skilled workers in minutes.
             </p>
-          </div>
-        </section>
+          </section>
 
-        <section className="dashboard-section">
-          <div className="post-job-form-container">
-            {error && <div className="error-message">{error}</div>}
+          <section className="bg-white shadow-md rounded-lg p-6 border border-blue-100">
+            {error && <div className="text-red-600 mb-4">{error}</div>}
 
-            <form onSubmit={handleSubmit} className="post-job-form">
-              <div className="form-group">
-                <label htmlFor="title">Job Title*</label>
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div>
+                <label htmlFor="title" className="block font-medium text-blue-700 mb-1">
+                  Job Title*
+                </label>
                 <input
                   type="text"
                   id="title"
@@ -159,11 +124,14 @@ const PostJobPage = ({ user }: PostJobPageProps) => {
                   onChange={handleChange}
                   placeholder="e.g., Garden cleanup, Furniture assembly"
                   maxLength={100}
+                  className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
 
-              <div className="form-group">
-                <label htmlFor="description">Description*</label>
+              <div>
+                <label htmlFor="description" className="block font-medium text-blue-700 mb-1">
+                  Description*
+                </label>
                 <textarea
                   id="description"
                   name="description"
@@ -172,12 +140,15 @@ const PostJobPage = ({ user }: PostJobPageProps) => {
                   placeholder="Describe what needs to be done in detail"
                   rows={5}
                   maxLength={500}
+                  className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
 
-              <div className="form-row">
-                <div className="form-group">
-                  <label htmlFor="budget">Budget (R)*</label>
+              <div className="flex flex-col md:flex-row gap-4">
+                <div className="flex-1">
+                  <label htmlFor="budget" className="block font-medium text-blue-700 mb-1">
+                    Budget (R)*
+                  </label>
                   <input
                     type="text"
                     id="budget"
@@ -185,11 +156,14 @@ const PostJobPage = ({ user }: PostJobPageProps) => {
                     value={formData.budget}
                     onChange={handleChange}
                     placeholder="e.g., 250 or 250.50"
+                    className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                 </div>
 
-                <div className="form-group">
-                  <label htmlFor="location">Location*</label>
+                <div className="flex-1">
+                  <label htmlFor="location" className="block font-medium text-blue-700 mb-1">
+                    Location*
+                  </label>
                   <input
                     type="text"
                     id="location"
@@ -197,17 +171,21 @@ const PostJobPage = ({ user }: PostJobPageProps) => {
                     value={formData.location}
                     onChange={handleChange}
                     placeholder="Where the job needs to be done"
+                    className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                 </div>
               </div>
 
-              <div className="form-group">
-                <label htmlFor="categoryID">Category*</label>
+              <div>
+                <label htmlFor="categoryID" className="block font-medium text-blue-700 mb-1">
+                  Category*
+                </label>
                 <select
                   id="categoryID"
                   name="categoryID"
                   value={formData.categoryID}
                   onChange={handleChange}
+                  className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
                   {jobCategories.map(category => (
                     <option key={category.id} value={category.id}>
@@ -217,26 +195,26 @@ const PostJobPage = ({ user }: PostJobPageProps) => {
                 </select>
               </div>
 
-              <div className="form-actions">
+              <div className="flex justify-end gap-4">
                 <button
                   type="button"
-                  className="cancel-btn"
                   onClick={() => navigate('/dashboard')}
                   disabled={isSubmitting}
+                  className="px-6 py-2 bg-gray-300 text-gray-800 rounded hover:bg-gray-400 disabled:opacity-50"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="submit-btn"
                   disabled={isSubmitting}
+                  className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50"
                 >
                   {isSubmitting ? 'Posting...' : 'Post Job'}
                 </button>
               </div>
             </form>
-          </div>
-        </section>
+          </section>
+        </div>
       </main>
     </div>
   );
