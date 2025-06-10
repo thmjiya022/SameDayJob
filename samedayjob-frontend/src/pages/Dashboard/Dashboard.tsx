@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Job } from '../../models/Job';
-import { getActiveJobs } from '../../services/jobService';
+import { getActiveJobs, deleteJob } from '../../services/jobService';
 import { useNavigate } from 'react-router-dom';
 import Sidebar from '../../components/Sidebar/Sidebar';
 
 interface User {
-  id: number;
+  userID: number;
   name: string;
   email: string;
   phoneNumber: string;
@@ -24,6 +24,7 @@ const Dashboard = ({ user, onLogout }: DashboardProps) => {
   const [activeJobs, setActiveJobs] = useState<Job[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [deletingId, setDeletingId] = useState<number | null>(null);
 
   useEffect(() => {
     const fetchJobs = async () => {
@@ -41,19 +42,36 @@ const Dashboard = ({ user, onLogout }: DashboardProps) => {
     fetchJobs();
   }, []);
 
+  const handleDeleteJob = async (jobId: number) => {
+    if (!window.confirm('Are you sure you want to delete this job?')) return;
+    
+    setDeletingId(jobId);
+    try {
+      const success = await deleteJob(jobId);
+      if (success) {
+        setActiveJobs(prev => prev.filter(job => job.jobID !== jobId));
+      }
+    } catch (err) {
+      setError('Failed to delete job. Please try again.');
+      console.error(err);
+    } finally {
+      setDeletingId(null);
+    }
+  };
+
   const popularCategories = [
-    { id: 1, name: "Cleaning", icon: "🧹", jobs: 124 },
-    { id: 2, name: "Moving", icon: "🚚", jobs: 89 },
-    { id: 3, name: "Gardening", icon: "🌿", jobs: 76 },
-    { id: 4, name: "Assembly", icon: "🛠️", jobs: 65 },
-    { id: 5, name: "Delivery", icon: "📦", jobs: 112 },
-    { id: 6, name: "Handyman", icon: "🔧", jobs: 98 }
+    { id: 1, name: "Cleaning", icon: "🧹", jobs: 124, route: "/jobs?category=cleaning" },
+    { id: 2, name: "Moving", icon: "🚚", jobs: 89, route: "/jobs?category=moving" },
+    { id: 3, name: "Gardening", icon: "🌿", jobs: 76, route: "/jobs?category=gardening" },
+    { id: 4, name: "Assembly", icon: "🛠️", jobs: 65, route: "/jobs?category=assembly" },
+    { id: 5, name: "Delivery", icon: "📦", jobs: 112, route: "/jobs?category=delivery" },
+    { id: 6, name: "Handyman", icon: "🔧", jobs: 98, route: "/jobs?category=handyman" }
   ];
 
   const topWorkers = [
-    { id: 1, name: "N Stevens", category: "Cleaning", rating: 4.9, completedJobs: 347, rate: "R200/hr" },
-    { id: 2, name: "T Tefera", category: "Gardening", rating: 4.8, completedJobs: 371, rate: "R250/hr" },
-    { id: 3, name: "M Maphalala", category: "Delivery", rating: 5.0, completedJobs: 198, rate: "R150/hr" }
+    { id: 1, name: "N Stevens", category: "Cleaning", rating: 4.9, completedJobs: 347, rate: "R200/hr", route: "/workers/1" },
+    { id: 2, name: "T Tefera", category: "Gardening", rating: 4.8, completedJobs: 371, rate: "R250/hr", route: "/workers/2" },
+    { id: 3, name: "M Maphalala", category: "Delivery", rating: 5.0, completedJobs: 198, rate: "R150/hr", route: "/workers/3" }
   ];
 
   const formattedJobs = activeJobs.map(job => ({
@@ -65,7 +83,8 @@ const Dashboard = ({ user, onLogout }: DashboardProps) => {
       day: 'numeric'
     }),
     status: job.status,
-    price: `R${job.budget}`
+    price: `R${job.budget}`,
+    isOwner: job.postedBy === user.userID
   }));
 
   if (loading) {
@@ -94,9 +113,8 @@ const Dashboard = ({ user, onLogout }: DashboardProps) => {
     <div className="flex min-h-screen bg-gray-100">
       <Sidebar user={user} onLogout={onLogout} />
 
-      {/* Main Content */}
       <main className="flex-1 p-4 max-w-4xl mx-auto">
-        {/* Welcome Section */}
+        
         <section className="mb-8">
           <div className="flex flex-col md:flex-row gap-6">
             <div className="flex-1">
@@ -171,9 +189,26 @@ const Dashboard = ({ user, onLogout }: DashboardProps) => {
                       className="flex-1 bg-blue-500 text-white rounded-md py-1 text-sm hover:bg-blue-600"
                       onClick={() => navigate(`/jobs/${job.id}`)}
                     >
-                      View Details
+                      Details
                     </button>
                   </div>
+                  {job.isOwner && (
+                    <div className="mt-3 pt-3 border-t border-gray-100">
+                      <button
+                        onClick={() => navigate(`/jobs/${job.id}/edit`)}
+                        className="w-full mb-2 bg-yellow-500 hover:bg-yellow-600 text-white py-1 px-2 rounded-md text-xs font-medium"
+                      >
+                        Edit Job
+                      </button>
+                      <button
+                        onClick={() => handleDeleteJob(job.id)}
+                        disabled={deletingId === job.id}
+                        className="w-full bg-red-500 hover:bg-red-600 text-white py-1 px-2 rounded-md text-xs font-medium disabled:opacity-50"
+                      >
+                        {deletingId === job.id ? 'Deleting...' : 'Delete Job'}
+                      </button>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
@@ -198,7 +233,7 @@ const Dashboard = ({ user, onLogout }: DashboardProps) => {
               className="text-blue-500 text-sm font-medium"
               onClick={() => navigate('/categories')}
             >
-              View all
+              View all categories
             </button>
           </div>
           
@@ -207,7 +242,7 @@ const Dashboard = ({ user, onLogout }: DashboardProps) => {
               <div 
                 key={category.id} 
                 className="bg-white p-4 rounded-lg shadow-sm border border-gray-200 text-center cursor-pointer hover:border-blue-500 transition-colors"
-                onClick={() => navigate(`/jobs?category=${category.name.toLowerCase()}`)}
+                onClick={() => navigate(category.route)}
               >
                 <div className="text-3xl mb-2">{category.icon}</div>
                 <h3 className="font-medium mb-1">{category.name}</h3>
@@ -225,7 +260,7 @@ const Dashboard = ({ user, onLogout }: DashboardProps) => {
               className="text-blue-500 text-sm font-medium"
               onClick={() => navigate('/workers')}
             >
-              View all
+              Browse all workers
             </button>
           </div>
           
@@ -249,7 +284,7 @@ const Dashboard = ({ user, onLogout }: DashboardProps) => {
                   <span className="font-medium text-blue-500">{worker.rate}</span>
                   <button 
                     className="bg-blue-500 hover:bg-blue-600 text-white py-1 px-3 rounded-md text-sm font-medium"
-                    onClick={() => navigate(`/workers/${worker.id}`)}
+                    onClick={() => navigate(worker.route)}
                   >
                     Hire
                   </button>

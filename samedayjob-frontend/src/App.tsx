@@ -7,6 +7,7 @@ import Register from './pages/Register/Register';
 import Dashboard from './pages/Dashboard/Dashboard';
 import PostJobPage from './pages/PostJob/PostJobPage';
 import { getCurrentUser, logout as performLogout } from './services/authService';
+import JobDetailPage from './pages/PostJob/JobDetailPage';
 
 const App = () => {
     const [user, setUser] = useState<any>(null);
@@ -34,6 +35,7 @@ const App = () => {
                         <Route path="/dashboard" element={user ? <Dashboard user={user} /> : <Navigate to="/login" />} />
                         <Route path="/post-job" element={user ? <PostJobPage user={user} /> : <Navigate to="/login" />} />
                         <Route path="/login" element={<Login onLogin={handleLogin} />} />
+                        <Route path="/jobs/:id" element={<JobDetailPage user={user} />} />
                         <Route path="/register" element={<Register />} />
                     </Routes>
                 </main>
