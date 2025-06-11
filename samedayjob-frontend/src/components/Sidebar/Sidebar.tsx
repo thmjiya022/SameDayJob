@@ -112,7 +112,6 @@ const Sidebar = ({ user, onLogout }: SidebarProps) => {
 
 	return (
 		<>
-			{/* Mobile Menu Button */}
 			<button
 				className="md:hidden fixed top-4 left-4 z-50 p-2 bg-white shadow-lg rounded-lg text-gray-600 hover:text-gray-900"
 				onClick={() => setMobileSidebarOpen(true)}
@@ -120,7 +119,6 @@ const Sidebar = ({ user, onLogout }: SidebarProps) => {
 				<Menu className="w-6 h-6" />
 			</button>
 
-			{/* Mobile Backdrop */}
 			{mobileSidebarOpen && (
 				<div
 					className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
@@ -128,7 +126,6 @@ const Sidebar = ({ user, onLogout }: SidebarProps) => {
 				/>
 			)}
 
-			{/* Mobile Sidebar */}
 			<aside
 				className={`fixed inset-y-0 left-0 w-64 z-50 transform transition-transform duration-300 ease-in-out md:hidden ${
 					mobileSidebarOpen ? 'translate-x-0' : '-translate-x-full'
@@ -137,7 +134,6 @@ const Sidebar = ({ user, onLogout }: SidebarProps) => {
 				<SidebarContent />
 			</aside>
 
-			{/* Desktop Sidebar */}
 			<aside className="hidden md:flex flex-col sticky top-0 h-screen w-64">
 				<SidebarContent />
 			</aside>
