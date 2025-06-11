@@ -16,11 +16,11 @@ const Footer = () => {
 						<div className="space-y-2 text-sm text-slate-300">
 							<div className="flex items-center space-x-2">
 								<Mail className="w-4 h-4 text-blue-400" />
-								<span>support@samedayjob.com</span>
+								<span>samedayjobteam@gmail.com</span>
 							</div>
 							<div className="flex items-center space-x-2">
 								<Phone className="w-4 h-4 text-blue-400" />
-								<span>1-800-SAME-DAY</span>
+								<span>+27660923214</span>
 							</div>
 							<div className="flex items-center space-x-2">
 								<MapPin className="w-4 h-4 text-blue-400" />
@@ -32,7 +32,7 @@ const Footer = () => {
 					<div>
 						<h3 className="text-lg font-semibold mb-4 text-white">For Customers</h3>
 						<ul className="space-y-3 text-sm text-slate-300">
-							<li><a href="#" className="hover:text-blue-400 transition-colors duration-200">Post a Task</a></li>
+							<li><a href="#" className="hover:text-blue-400 transition-colors duration-200">Post a Job</a></li>
 							<li><a href="#" className="hover:text-blue-400 transition-colors duration-200">Browse Services</a></li>
 							<li><a href="#" className="hover:text-blue-400 transition-colors duration-200">How It Works</a></li>
 							<li><a href="#" className="hover:text-blue-400 transition-colors duration-200">Pricing</a></li>
