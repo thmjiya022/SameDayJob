@@ -58,22 +58,7 @@ const Dashboard = ({ user, onLogout }: DashboardProps) => {
       setDeletingId(null);
     }
   };
-
-  const popularCategories = [
-    { id: 1, name: "Cleaning", icon: "🧹", jobs: 124, route: "/jobs?category=cleaning" },
-    { id: 2, name: "Moving", icon: "🚚", jobs: 89, route: "/jobs?category=moving" },
-    { id: 3, name: "Gardening", icon: "🌿", jobs: 76, route: "/jobs?category=gardening" },
-    { id: 4, name: "Assembly", icon: "🛠️", jobs: 65, route: "/jobs?category=assembly" },
-    { id: 5, name: "Delivery", icon: "📦", jobs: 112, route: "/jobs?category=delivery" },
-    { id: 6, name: "Handyman", icon: "🔧", jobs: 98, route: "/jobs?category=handyman" }
-  ];
-
-  const topWorkers = [
-    { id: 1, name: "N Stevens", category: "Cleaning", rating: 4.9, completedJobs: 347, rate: "R200/hr", route: "/workers/1" },
-    { id: 2, name: "T Tefera", category: "Gardening", rating: 4.8, completedJobs: 371, rate: "R250/hr", route: "/workers/2" },
-    { id: 3, name: "M Maphalala", category: "Delivery", rating: 5.0, completedJobs: 198, rate: "R150/hr", route: "/workers/3" }
-  ];
-
+  
   const formattedJobs = activeJobs.map(job => ({
     id: job.jobID,
     title: job.title,
@@ -84,7 +69,7 @@ const Dashboard = ({ user, onLogout }: DashboardProps) => {
     }),
     status: job.status,
     price: `R${job.budget}`,
-    isOwner: job.postedBy === user.userID
+    isOwner: job.postedBy.userID === user.userID
   }));
 
   if (loading) {
@@ -159,7 +144,7 @@ const Dashboard = ({ user, onLogout }: DashboardProps) => {
           
           {formattedJobs.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
-              {formattedJobs.map(job => (
+              {formattedJobs.filter(job => job.isOwner).map(job => (
                 <div key={job.id} className="bg-white p-4 rounded-lg shadow-sm border-l-4 border-blue-500">
                   <div className="flex justify-between items-start mb-3">
                     <h3 className="font-medium">{job.title}</h3>
@@ -188,26 +173,24 @@ const Dashboard = ({ user, onLogout }: DashboardProps) => {
                       className="flex-1 bg-blue-500 text-white rounded-md py-1 text-sm hover:bg-blue-600"
                       onClick={() => navigate(`/jobs/${job.id}`)}
                     >
-                      Details {job.isOwner} === null
+                      Details 
                     </button>
                   </div>
-                  {job.isOwner && (
-                    <div className="mt-3 pt-3 border-t border-gray-100">
-                      <button
-                        onClick={() => navigate(`/jobs/${job.id}/edit`)}
-                        className="w-full mb-2 bg-yellow-500 hover:bg-yellow-600 text-white py-1 px-2 rounded-md text-xs font-medium"
-                      >
-                        Edit Job
-                      </button>
-                      <button
-                        onClick={() => handleDeleteJob(job.id)}
-                        disabled={deletingId === job.id}
-                        className="w-full bg-red-500 hover:bg-red-600 text-white py-1 px-2 rounded-md text-xs font-medium disabled:opacity-50"
-                      >
-                        {deletingId === job.id ? 'Deleting...' : 'Delete Job'}
-                      </button>
-                    </div>
-                  )}
+                  <div className="mt-3 pt-3 border-t border-gray-100">
+                    <button
+                      onClick={() => navigate(`/jobs/${job.id}/edit`)}
+                      className="w-full mb-2 bg-yellow-500 hover:bg-yellow-600 text-white py-1 px-2 rounded-md text-xs font-medium"
+                    >
+                      Edit Job
+                    </button>
+                    <button
+                      onClick={() => handleDeleteJob(job.id)}
+                      disabled={deletingId === job.id}
+                      className="w-full bg-red-500 hover:bg-red-600 text-white py-1 px-2 rounded-md text-xs font-medium disabled:opacity-50"
+                    >
+                      {deletingId === job.id ? 'Deleting...' : 'Delete Job'}
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>
@@ -225,7 +208,6 @@ const Dashboard = ({ user, onLogout }: DashboardProps) => {
         </section>
 
       </main>
-  
     </div>
   );
 };
