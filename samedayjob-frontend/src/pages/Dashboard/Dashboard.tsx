@@ -146,7 +146,6 @@ const Dashboard = ({ user, onLogout }: DashboardProps) => {
           </div>
         </section>
 
-        {/* Active Jobs Section */}
         <section className="mb-8">
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-xl font-bold">Your Active Jobs</h2>
@@ -159,7 +158,7 @@ const Dashboard = ({ user, onLogout }: DashboardProps) => {
           </div>
           
           {formattedJobs.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
               {formattedJobs.map(job => (
                 <div key={job.id} className="bg-white p-4 rounded-lg shadow-sm border-l-4 border-blue-500">
                   <div className="flex justify-between items-start mb-3">
@@ -189,7 +188,7 @@ const Dashboard = ({ user, onLogout }: DashboardProps) => {
                       className="flex-1 bg-blue-500 text-white rounded-md py-1 text-sm hover:bg-blue-600"
                       onClick={() => navigate(`/jobs/${job.id}`)}
                     >
-                      Details
+                      Details {job.isOwner} === null
                     </button>
                   </div>
                   {job.isOwner && (
@@ -225,134 +224,8 @@ const Dashboard = ({ user, onLogout }: DashboardProps) => {
           )}
         </section>
 
-        {/* Popular Categories Section */}
-        <section className="mb-8">
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-bold">Popular Categories</h2>
-            <button 
-              className="text-blue-500 text-sm font-medium"
-              onClick={() => navigate('/categories')}
-            >
-              View all categories
-            </button>
-          </div>
-          
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-            {popularCategories.map(category => (
-              <div 
-                key={category.id} 
-                className="bg-white p-4 rounded-lg shadow-sm border border-gray-200 text-center cursor-pointer hover:border-blue-500 transition-colors"
-                onClick={() => navigate(category.route)}
-              >
-                <div className="text-3xl mb-2">{category.icon}</div>
-                <h3 className="font-medium mb-1">{category.name}</h3>
-                <p className="text-xs text-gray-500">{category.jobs} jobs available</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Top Workers Section */}
-        <section className="mb-8">
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-bold">Top Rated Workers</h2>
-            <button 
-              className="text-blue-500 text-sm font-medium"
-              onClick={() => navigate('/workers')}
-            >
-              Browse all workers
-            </button>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {topWorkers.map(worker => (
-              <div key={worker.id} className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
-                <div className="flex items-center mb-3">
-                  <div className="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold mr-3">
-                    {worker.name.charAt(0)}
-                  </div>
-                  <div>
-                    <h3 className="font-medium">{worker.name}</h3>
-                    <p className="text-sm text-gray-500">{worker.category}</p>
-                  </div>
-                </div>
-                <div className="flex items-center text-sm mb-3">
-                  <span className="text-yellow-400">★★★★★</span>
-                  <span className="ml-1 text-gray-600">{worker.rating} ({worker.completedJobs} jobs)</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="font-medium text-blue-500">{worker.rate}</span>
-                  <button 
-                    className="bg-blue-500 hover:bg-blue-600 text-white py-1 px-3 rounded-md text-sm font-medium"
-                    onClick={() => navigate(worker.route)}
-                  >
-                    Hire
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
       </main>
-
-      {/* Right Sidebar */}
-      <aside className="w-80 bg-white border-l border-gray-200 p-4 hidden lg:block sticky top-0 h-screen overflow-y-auto">
-        <div className="bg-blue-50 border border-blue-100 rounded-md p-4 mb-6">
-          <h3 className="font-bold mb-2">How it works</h3>
-          <ol className="list-decimal list-inside text-sm space-y-2 text-gray-700">
-            <li>Post your job with details</li>
-            <li>Workers send you offers</li>
-            <li>Choose the best worker</li>
-            <li>Pay securely after completion</li>
-          </ol>
-          <button 
-            className="w-full mt-4 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md text-sm font-medium"
-            onClick={() => navigate('/how-it-works')}
-          >
-            Learn More
-          </button>
-        </div>
-        
-        <div className="border border-gray-200 rounded-md p-4 mb-6">
-          <h3 className="font-bold mb-3">Job Posting Tips</h3>
-          <ul className="space-y-3 text-sm">
-            <li className="flex items-start">
-              <span className="bg-blue-100 text-blue-500 rounded-full p-1 mr-2">💡</span>
-              <span>Be specific about your requirements</span>
-            </li>
-            <li className="flex items-start">
-              <span className="bg-blue-100 text-blue-500 rounded-full p-1 mr-2">💡</span>
-              <span>Include clear photos if possible</span>
-            </li>
-            <li className="flex items-start">
-              <span className="bg-blue-100 text-blue-500 rounded-full p-1 mr-2">💡</span>
-              <span>Set a realistic budget</span>
-            </li>
-            <li className="flex items-start">
-              <span className="bg-blue-100 text-blue-500 rounded-full p-1 mr-2">💡</span>
-              <span>Respond quickly to worker questions</span>
-            </li>
-          </ul>
-        </div>
-        
-        <div className="border border-gray-200 rounded-md p-4">
-          <h3 className="font-bold mb-3">Safety Tips</h3>
-          <ul className="space-y-3 text-sm">
-            <li className="flex items-start">
-              <span className="bg-green-100 text-green-500 rounded-full p-1 mr-2">🛡️</span>
-              <span>Only communicate through the platform</span>
-            </li>
-            <li className="flex items-start">
-              <span className="bg-green-100 text-green-500 rounded-full p-1 mr-2">🛡️</span>
-              <span>Check worker ratings and reviews</span>
-            </li>
-            <li className="flex items-start">
-              <span className="bg-green-100 text-green-500 rounded-full p-1 mr-2">🛡️</span>
-              <span>Pay through the platform for protection</span>
-            </li>
-          </ul>
-        </div>
-      </aside>
+  
     </div>
   );
 };
